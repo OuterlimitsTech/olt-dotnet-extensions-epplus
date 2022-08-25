@@ -1,10 +1,13 @@
-#NOTE:
-This package was copied from https://github.com/eraydin/EPPlus.Core.Extensions
+NOTE: This package was copied from https://github.com/eraydin/EPPlus.Core.Extensions
 The owner no longer supports it with no reason given. The codebase worked with EPPlus 6.x, so we changed the namespaces and package name
 
 <img src="https://user-images.githubusercontent.com/1365728/127748628-47575d74-a2fb-4539-a31e-74d8b435fc21.png" width="30%" >
 
-[Nuget](https://img.shields.io/nuget/v/OLT.Extensions.EPPlus)](https://www.nuget.org/packages/OLT.Extensions.EPPlus)
+[![CI](https://github.com/OuterlimitsTech/olt-dotnet-extensions-epplus/actions/workflows/build.yml/badge.svg)](https://github.com/OuterlimitsTech/olt-dotnet-extensions-epplus/actions/workflows/build.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=OuterlimitsTech_olt-dotnet-extensions-epplus&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=OuterlimitsTech_olt-dotnet-extensions-epplus)
+
+| Library                                              | Version                                                                                                                |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [OLT.Extensions.EPPlus](./src/OLT.Extensions.EPPlus) | [![Nuget](https://img.shields.io/nuget/v/OLT.Extensions.EPPlus)](https://www.nuget.org/packages/OLT.Extensions.EPPlus) |
 
 ##### Basic examples:
 
