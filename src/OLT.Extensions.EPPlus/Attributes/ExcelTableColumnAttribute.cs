@@ -1,0 +1,74 @@
+﻿using System;
+
+using static OLT.Extensions.EPPlus.Helpers.Guard;
+
+namespace OLT.Extensions.EPPlus.Attributes
+{
+    /// <inheritdoc />
+    /// <summary>
+    ///     Attribute used to map property to Excel table column
+    /// </summary>
+    /// <remarks>Can not map by both name and index. It will map to the property name if none is specified</remarks>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ExcelTableColumnAttribute : Attribute
+    {
+        private int _columnIndex;
+
+        private string _columnName;
+        
+
+        public ExcelTableColumnAttribute(bool isOptional = false)
+        {
+            IsOptional = isOptional;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Set this property to map by 1-based index
+        /// </summary>
+        public ExcelTableColumnAttribute(int columnIndex, bool isOptional = false) : this(isOptional)
+        {
+            ColumnIndex = columnIndex;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Set this property to map by name
+        /// </summary>
+        public ExcelTableColumnAttribute(string columnName, bool isOptional = false) : this(isOptional)
+        {
+            ColumnName = columnName;
+        } 
+
+        /// <summary>
+        ///     Set this property to map by name
+        /// </summary>
+        public string ColumnName
+        {
+            get => _columnName;
+            set
+            {
+                ThrowIfConditionMet(_columnIndex > 0, "Cannot set both {0} and {1}!", nameof(ColumnName), nameof(ColumnIndex));
+                NotNullOrWhiteSpace(value, nameof(ColumnName));
+
+                _columnName = value;
+            }
+        }
+
+        /// <summary>
+        ///     Use this property to map by 1-based index
+        /// </summary>
+        public int ColumnIndex
+        {
+            get => _columnIndex;
+            set
+            {
+                ThrowIfConditionMet(_columnName != null, "Cannot set both {0} and {1}!", nameof(ColumnName), nameof(ColumnIndex));
+                ThrowIfConditionMet(value <= 0, "{0} cannot be zero or negative!", nameof(ColumnIndex));
+                _columnIndex = value;
+            }
+        }
+
+        public bool IsOptional { get; set; }
+    }
+}

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.EPPlus", "src\OLT.Extensions.EPPlus\OLT.Extensions.EPPlus.csproj", "{503C4D70-3934-486C-B983-6C1E3AE5C1A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OLT.Extensions.EPPlus", "OLT.Extensions.EPPlus", "{B572BFF5-8B5F-4FC8-B761-CA95E79E3A01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLT.Extensions.EPPlus.Tests", "tests\OLT.Extensions.EPPlus.Tests\OLT.Extensions.EPPlus.Tests.csproj", "{7F71C353-AF16-4BCE-B782-C6CB8739A45D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{503C4D70-3934-486C-B983-6C1E3AE5C1A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{503C4D70-3934-486C-B983-6C1E3AE5C1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{503C4D70-3934-486C-B983-6C1E3AE5C1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{503C4D70-3934-486C-B983-6C1E3AE5C1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F71C353-AF16-4BCE-B782-C6CB8739A45D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F71C353-AF16-4BCE-B782-C6CB8739A45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F71C353-AF16-4BCE-B782-C6CB8739A45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F71C353-AF16-4BCE-B782-C6CB8739A45D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{503C4D70-3934-486C-B983-6C1E3AE5C1A5} = {B572BFF5-8B5F-4FC8-B761-CA95E79E3A01}
+		{7F71C353-AF16-4BCE-B782-C6CB8739A45D} = {B572BFF5-8B5F-4FC8-B761-CA95E79E3A01}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC4E02B5-AB73-4175-AC69-072C78493FB5}
+	EndGlobalSection
+EndGlobal
