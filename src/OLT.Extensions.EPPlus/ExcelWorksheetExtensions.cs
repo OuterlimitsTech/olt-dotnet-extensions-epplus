@@ -58,6 +58,11 @@ namespace OLT.Extensions.EPPlus
             return worksheet.Cells[dataBounds.Address];
         }
 
+        public static ExcelTable GetTable(this ExcelWorksheet worksheet, string tableName) => worksheet.Tables.FirstOrDefault(x => x.Name == tableName);
+
+        public static ExcelTable GetTable(this ExcelWorksheet worksheet, int tableIndex) => worksheet.Tables[tableIndex];
+
+
         /// <summary>
         ///     Creates an Excel table using the data bounds of the worksheet.
         /// </summary>
@@ -68,10 +73,6 @@ namespace OLT.Extensions.EPPlus
         {
             return worksheet.AsExcelTable(StringHelper.GenerateRandomTableName(), hasHeaderRow);
         }
-
-        public static ExcelTable GetTable(this ExcelWorksheet worksheet, string tableName) => worksheet.Tables.FirstOrDefault(x => x.Name == tableName);
-
-        public static ExcelTable GetTable(this ExcelWorksheet worksheet, int tableIndex) => worksheet.Tables[tableIndex];
 
         /// <summary>
         ///     Creates an Excel table using the data bounds of the worksheet.

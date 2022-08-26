@@ -10,7 +10,11 @@ namespace OLT.Extensions.EPPlus.Helpers
         {
             using (IEnumerator<T> enumerator = source.GetEnumerator())
             {
-                return enumerator.MoveNext() && enumerator.MoveNext();
+                if (enumerator.MoveNext())
+                {
+                    return enumerator.MoveNext();
+                }
+                return false;
             }
         }
     }

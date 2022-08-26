@@ -250,7 +250,7 @@ namespace OLT.Extensions.EPPlus
 
             if (type == typeof(DateTime))
             {
-                if (!DateTime.TryParse(cell.ToString(), out DateTime parsedDate))
+                if (!DateTime.TryParse(cell?.ToString(), out DateTime parsedDate))
                 {
                     parsedDate = DateTime.FromOADate((double)cell);
                 }
