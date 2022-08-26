@@ -33,20 +33,14 @@ namespace OLT.Extensions.EPPlus
         /// </summary>
         internal void AppendWorksheet()
         {
-            if (Package == null)
-            {
-                Package = new ExcelPackage();
-            }
+            Package = Package ?? new ExcelPackage();
 
             ExcelWorksheet worksheet = Package.Workbook.Worksheets.Add(Name);
             
             var rowOffset = 0;
 
             //if no columns specified auto generate them with reflection
-            if (Columns == null || !Columns.Any())
-            {
-                Columns = AutoGenerateColumns();
-            }
+            Columns = Columns?.Any() == true ? Columns : AutoGenerateColumns();
             
             //render title rows
             if (Titles != null)
@@ -85,16 +79,13 @@ namespace OLT.Extensions.EPPlus
             CreateTableIfPossible(worksheet);
 
             //render data
-            if (Rows != null)
+            for (var r = 0; r < Rows?.Count(); r++)
             {
-                for (var r = 0; r < Rows.Count(); r++)
+                for (var c = 0; c < Columns.Count; c++)
                 {
-                    for (var c = 0; c < Columns.Count(); c++)
-                    {
-                        worksheet.Cells[r + rowOffset + 1, c + 1].Value = Columns[c].Map(Rows.ElementAt(r));
+                    worksheet.Cells[r + rowOffset + 1, c + 1].Value = Columns[c].Map(Rows.ElementAt(r));
 
-                        Configuration.ConfigureCell?.Invoke(worksheet.Cells[r + rowOffset + 1, c + 1], Rows.ElementAt(r));
-                    }
+                    Configuration.ConfigureCell?.Invoke(worksheet.Cells[r + rowOffset + 1, c + 1], Rows.ElementAt(r));
                 }
             }
 

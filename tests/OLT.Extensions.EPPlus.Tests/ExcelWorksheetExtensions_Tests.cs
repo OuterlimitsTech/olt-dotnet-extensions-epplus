@@ -382,8 +382,8 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
-            list1.Count().Should().Be(4, "Should have four");
-            list2.Count().Should().Be(4, "Should have four");
+            list1.Count.Should().Be(4, "Should have four");
+            list2.Count.Should().Be(4, "Should have four");
         }
 
         [Fact]
