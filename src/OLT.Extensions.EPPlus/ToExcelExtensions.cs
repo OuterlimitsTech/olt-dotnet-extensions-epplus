@@ -134,7 +134,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static ExcelPackage ToExcelPackage<T>(this IEnumerable<T> rows, bool addHeaderRow = true, string worksheetName = null)
         {
-            WorksheetWrapper<T> worksheet = rows.ToWorksheet(string.IsNullOrEmpty(worksheetName) ? typeof(T).Name : worksheetName);
+            WorksheetWrapper<T> worksheet = rows.ToWorksheet(string.IsNullOrEmpty(worksheetName) ? typeof(T).GetWorksheetName() : worksheetName);
 
             if (!addHeaderRow)
             {
