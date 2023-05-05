@@ -46,7 +46,7 @@ namespace OLT.Extensions.EPPlus
         internal static string GetWorksheetName(this Type type)
         {
             Attribute worksheetAttribute = type.GetCustomAttribute(typeof(ExcelWorksheetAttribute), true);
-            return (worksheetAttribute as ExcelWorksheetAttribute)?.WorksheetName;
+            return (worksheetAttribute as ExcelWorksheetAttribute)?.WorksheetName ?? type.Name; 
         }
 
         /// <summary>
