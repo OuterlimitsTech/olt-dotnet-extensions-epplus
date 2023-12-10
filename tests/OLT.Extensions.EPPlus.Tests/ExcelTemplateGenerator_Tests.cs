@@ -25,9 +25,7 @@ namespace OLT.Extensions.EPPlus.Tests
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             Type wrongCarsType = executingAssembly.GetTypesMarkedAsExcelWorksheet().First(x => x.Name == "WrongCars");
             var worksheetIndex = 0;
-#if NETFRAMEWORK
-            worksheetIndex = 1;
-#endif
+
 
             //-----------------------------------------------------------------------------------------------------------
             // Act

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using OfficeOpenXml.Style;
 
@@ -61,7 +62,8 @@ namespace OLT.Extensions.EPPlus.Style
         /// <returns></returns>
         public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font)
         {
-            thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
+            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
+            thisStyle.SetFont(font);
             return thisStyle;
         }
 
@@ -74,7 +76,8 @@ namespace OLT.Extensions.EPPlus.Style
         /// <returns></returns>
         public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font, Color color)
         {
-            thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
+            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
+            thisStyle.SetFont(font);
             thisStyle.SetFontColor(color);
             return thisStyle;
         }
