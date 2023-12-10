@@ -5,7 +5,7 @@
     <Company>OuterLimits Technologies, Inc</Company>
     <Product>OLT EPPlus Exenstions</Product>
     <Authors>Chris Straw</Authors>
-    <Copyright>Copyright © 2003-2023, OuterLimits Technologies, Inc Plainfield, IN</Copyright>
+    <Copyright>Copyright © 2003-2024, OuterLimits Technologies, Inc Plainfield, IN</Copyright>
     <RepositoryUrl>https://github.com/OuterlimitsTech/olt-dotnet-extensions-epplus</RepositoryUrl>
     <PackageIcon>icon.png</PackageIcon>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
