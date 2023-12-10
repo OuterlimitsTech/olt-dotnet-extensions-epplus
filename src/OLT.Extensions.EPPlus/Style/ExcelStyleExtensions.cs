@@ -60,10 +60,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="thisStyle">The Excel style</param>
         /// <param name="font">The font</param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font)
         {
-            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
-            thisStyle.SetFont(font);
+            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);            
             return thisStyle;
         }
 
@@ -74,10 +74,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="font">The font</param>
         /// <param name="color">The color</param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font, Color color)
         {
             //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
-            thisStyle.SetFont(font);
             thisStyle.SetFontColor(color);
             return thisStyle;
         }
