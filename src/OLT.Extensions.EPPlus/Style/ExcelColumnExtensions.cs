@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -13,9 +14,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="column"></param>
         /// <param name="font"></param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelColumn SetFont(this ExcelColumn column, Font font)
         {
-            column.Style.SetFont(font);
+            //column.Style.SetFont(font);
             return column;
         }
 

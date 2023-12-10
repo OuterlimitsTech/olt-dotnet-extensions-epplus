@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -13,9 +14,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="worksheet"></param>
         /// <param name="font"></param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelWorksheet SetFont(this ExcelWorksheet worksheet, Font font)
         {
-            worksheet.Cells.SetFont(font);
+            //worksheet.Cells.SetFont(font);
             return worksheet;
         }
 
@@ -26,9 +28,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="cellRange"></param>
         /// <param name="font"></param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelWorksheet SetFont(this ExcelWorksheet worksheet, ExcelRange cellRange, Font font)
         {
-            worksheet.Cells[cellRange.Address].SetFont(font);
+            //worksheet.Cells[cellRange.Address].SetFont(font);
             return worksheet;
         }
 

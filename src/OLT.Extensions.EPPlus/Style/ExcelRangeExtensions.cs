@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -63,11 +64,13 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="range"></param>
         /// <param name="font"></param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelRangeBase SetFont(this ExcelRangeBase range, Font font)
         {
-            range.Style.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
+            //range.Style.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
             return range;
         }
+
 
         /// <summary>
         ///     Sets the font color of given range from a Color object
@@ -90,6 +93,12 @@ namespace OLT.Extensions.EPPlus.Style
         public static ExcelRangeBase SetFontAsBold(this ExcelRangeBase range)
         {
             range.Style.SetFontAsBold();
+            return range;
+        }
+
+        public static ExcelRangeBase SetFontSize(this ExcelRangeBase range, float size)
+        {
+            range.Style.Font.Size = size;
             return range;
         }
 

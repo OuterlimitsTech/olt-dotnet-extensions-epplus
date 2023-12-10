@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -13,9 +14,10 @@ namespace OLT.Extensions.EPPlus.Style
         /// <param name="row"></param>
         /// <param name="font"></param>
         /// <returns></returns>
+        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
         public static ExcelRow SetFont(this ExcelRow row, Font font)
         {
-            row.Style.SetFont(font);
+            //row.Style.SetFont(font);
             return row;
         }
 

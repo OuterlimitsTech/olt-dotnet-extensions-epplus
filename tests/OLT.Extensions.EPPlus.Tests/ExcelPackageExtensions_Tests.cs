@@ -62,10 +62,6 @@ namespace OLT.Extensions.EPPlus.Tests
             var stocksNullableWorksheetIndex = 5;
             var stocksValidationWorksheetIndex = 4;
 
-#if NETFRAMEWORK
-            stocksNullableWorksheetIndex = 6;
-            stocksValidationWorksheetIndex = 5;
-#endif
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
@@ -130,9 +126,7 @@ namespace OLT.Extensions.EPPlus.Tests
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
             var worksheetIndex = 5;
-#if NETFRAMEWORK
-            worksheetIndex = 6;
-#endif
+
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
