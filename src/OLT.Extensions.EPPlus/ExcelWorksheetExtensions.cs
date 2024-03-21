@@ -12,6 +12,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
 using static OLT.Extensions.EPPlus.Helpers.Guard;
+using static OfficeOpenXml.ExcelErrorValue;
 
 namespace OLT.Extensions.EPPlus
 {
@@ -262,7 +263,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex = 1, Action<ExcelRange> configureCells = null)
         {
-            NotNull(items, nameof(items));
+            ArgumentNullException.ThrowIfNull(items);
 
             for (var i = 0; i < items.Count(); i++)
             {
@@ -299,7 +300,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex, Action<ExcelRange> configureCells = null, params Func<T, object>[] propertySelectors)
         {
-            NotNull(propertySelectors, nameof(propertySelectors));
+            ArgumentNullException.ThrowIfNull(propertySelectors);
 
             for (var i = 0; i < items.Count(); i++)
             {

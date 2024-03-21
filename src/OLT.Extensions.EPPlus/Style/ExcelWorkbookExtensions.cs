@@ -20,7 +20,7 @@ namespace OLT.Extensions.EPPlus.Style
         /// <returns></returns>
         public static ExcelWorkbook CreateNamedStyle(this ExcelWorkbook workbook, string styleName, Action<ExcelStyle> styleAction)
         {
-            NotNull(styleAction, nameof(styleAction));
+            ArgumentNullException.ThrowIfNull(styleAction);
             ThrowIfConditionMet(workbook.Styles.NamedStyles.Any(x => x.Name == styleName), "The Excel package already has a style with the name of '{0}'", styleName);
             
             ExcelNamedStyleXml errorStyle = workbook.Styles.CreateNamedStyle(styleName);
@@ -38,7 +38,7 @@ namespace OLT.Extensions.EPPlus.Style
         /// <returns></returns>
         public static ExcelWorkbook CreateNamedStyleIfNotExists(this ExcelWorkbook workbook, string styleName, Action<ExcelStyle> styleAction)
         {
-            NotNull(styleAction, nameof(styleAction));
+            ArgumentNullException.ThrowIfNull(styleAction);
 
             if (workbook.Styles.NamedStyles.All(x => x.Name != styleName))
             {

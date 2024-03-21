@@ -195,8 +195,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns>Excel package</returns>
         public static ExcelPackage AsExcelPackage(this Stream stream)
         {
-            NotNull(stream, nameof(stream));
-
+            ArgumentNullException.ThrowIfNull(stream);            
             return new ExcelPackage(stream);
         }
 
@@ -208,7 +207,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns>Excel package</returns>
         public static ExcelPackage AsExcelPackage(this Stream stream, string password)
         {
-            NotNull(stream, nameof(stream));
+            ArgumentNullException.ThrowIfNull(stream);            
             NotNullOrWhiteSpace(password, nameof(password));
 
             return new ExcelPackage(stream, password);
