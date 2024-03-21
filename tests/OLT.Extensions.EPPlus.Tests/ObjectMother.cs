@@ -17,7 +17,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class WrongCars
     {
         [ExcelTableColumn("License plate")]
-        public string LicensePlate { get; set; }
+        public string? LicensePlate { get; set; }
 
         [ExcelTableColumn]
         public Manufacturers Manufacturer { get; set; }
@@ -33,30 +33,30 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class DefaultMap
     {
         [ExcelTableColumn]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
     }
 
     internal class NamedMap
     {
         [ExcelTableColumn("Name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [ExcelTableColumn("Gender")]
-        public string Sex { get; set; }
+        public string? Sex { get; set; }
 
-        public string NotMapped { get; set; }
+        public string? NotMapped { get; set; }
     }
 
     internal class IndexMap
     {
         [ExcelTableColumn(1)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn(3)]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
     }
 
     internal enum Genders
@@ -68,7 +68,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class EnumStringMap
     {
         [ExcelTableColumn("Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn("Gender")]
         public Genders Gender { get; set; }
@@ -83,7 +83,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class EnumByteMap
     {
         [ExcelTableColumn]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn]
         public Classes Class { get; set; }
@@ -92,7 +92,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class MultiMap
     {
         [ExcelTableColumn]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn("Class")]
         public Classes Class { get; set; }
@@ -106,7 +106,7 @@ namespace OLT.Extensions.EPPlus.Tests
         [ExcelTableColumn]
         [MinLength(1)]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn]
         public Genders Gender { get; set; }
@@ -120,7 +120,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class EnumFailMap
     {
         [ExcelTableColumn]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn("Gender")]
         public Classes Gender { get; set; }
@@ -129,7 +129,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class CarNullable
     {
         [ExcelTableColumn("Car name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn]
         public int? Price { get; set; }
@@ -138,7 +138,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class StocksNullable
     {
         [ExcelTableColumn(1)]
-        public string Barcode { get; set; }
+        public string? Barcode { get; set; }
 
         [ExcelTableColumn(2)]
         public int? Quantity { get; set; }
@@ -150,13 +150,13 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class ExcelWithOptionalFields
     {
         [ExcelTableColumn("Name", false)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [ExcelTableColumn("Middle Name", true)]
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
         [ExcelTableColumn("Surname", false)]
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
 
         [ExcelTableColumn("UpdatedDate", false)]
         public DateTime? UpdatedDate { get; set; }
@@ -168,7 +168,7 @@ namespace OLT.Extensions.EPPlus.Tests
         public decimal MissingColumn1 { get; set; }
 
         [ExcelTableColumn("MissingColumn2", true)]
-        public object MissingColumn2 { get; set; }
+        public object? MissingColumn2 { get; set; }
 
         [ExcelTableColumn("MissingColumn3", true)]
         public DateTime? MissingColumn3 { get; set; }
@@ -179,7 +179,7 @@ namespace OLT.Extensions.EPPlus.Tests
         [ExcelTableColumn(1)]
         [MinLength(1)]
         [MaxLength(255)]
-        public string Barcode { get; set; }
+        public string? Barcode { get; set; }
 
         [ExcelTableColumn(2)]
         [Range(10, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
@@ -188,7 +188,7 @@ namespace OLT.Extensions.EPPlus.Tests
         [ExcelTableColumn(3)]
         public DateTime UpdatedDate { get; set; }
 
-        public string NotMappedProperty { get; set; }
+        public string? NotMappedProperty { get; set; }
     }
 
     internal enum Manufacturers2
@@ -201,7 +201,7 @@ namespace OLT.Extensions.EPPlus.Tests
     internal class Cars
     {
         [ExcelTableColumn(1)]
-        public string LicensePlate { get; set; }
+        public string? LicensePlate { get; set; }
 
         [ExcelTableColumn]
         public Manufacturers2 Manufacturer { get; set; }
@@ -218,7 +218,7 @@ namespace OLT.Extensions.EPPlus.Tests
         [ExcelTableColumn("Is ready for traffic?")]
         public bool Ready { get; set; }
 
-        public string UnmappedProperty { get; set; }
+        public string? UnmappedProperty { get; set; }
 
         public override string ToString()
         {
@@ -228,17 +228,17 @@ namespace OLT.Extensions.EPPlus.Tests
 
     public class Car
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public decimal Price { get; set; }
     }
 
     public class Person
     {
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [ExcelTableColumn(2)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [ExcelTableColumn("Year of Birth")]
         public int YearBorn { get; set; }
@@ -246,9 +246,9 @@ namespace OLT.Extensions.EPPlus.Tests
 
     public class ObjectWithoutExcelTableAttributes
     {
-        public string FirstName { get; set; }   
+        public string? FirstName { get; set; }   
        
-        public string LastName { get; set; }   
+        public string? LastName { get; set; }   
         
         public int YearBorn { get; set; }
     }
@@ -256,10 +256,10 @@ namespace OLT.Extensions.EPPlus.Tests
     public class ObjectWithWrongAttributeMappings
     {
         [ExcelTableColumn(5)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [ExcelTableColumn("Firstname")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         public int YearBorn { get; set; }
     }
@@ -267,7 +267,7 @@ namespace OLT.Extensions.EPPlus.Tests
     public class UnorderedBarcodeAndQuantity
     {
         [ExcelTableColumn]
-        public string Barcode { get; set; }
+        public string? Barcode { get; set; }
 
         [ExcelTableColumn("Quantity")]
         public int Quantity { get; set; }

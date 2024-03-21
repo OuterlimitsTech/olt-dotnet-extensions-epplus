@@ -68,7 +68,7 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             var optionalStocks = ExcelPackage1.ToList<StocksNullable>(stocksNullableWorksheetIndex, configuration => configuration.SkipCastingErrors()
                                                                                                                                        .SkipValidationErrors()
-                                                                                                                                       .Intercept((current, rowIndex) => { current.Barcode = current.Barcode.Insert(0, "_"); }));
+                                                                                                                                       .Intercept((current, rowIndex) => { current.Barcode = current.Barcode?.Insert(0, "_"); }));
 
             var stocks = ExcelPackage1.ToList<StocksValidation>(stocksValidationWorksheetIndex, configuration => configuration.SkipCastingErrors()
                                                                                                                                               .SkipValidationErrors()
@@ -79,7 +79,7 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             optionalStocks.Any().Should().BeTrue();
             optionalStocks.Count.Should().Be(3);
-            optionalStocks.All(x => x.Barcode.StartsWith("_")).Should().Be(true);
+            optionalStocks.All(x => x.Barcode!.StartsWith("_")).Should().Be(true);
 
             stocks.Min(x => x.Quantity).Should().BeGreaterThan(10);
         }
