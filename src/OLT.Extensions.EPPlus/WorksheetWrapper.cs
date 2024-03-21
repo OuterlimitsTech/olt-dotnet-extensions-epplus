@@ -14,17 +14,17 @@ namespace OLT.Extensions.EPPlus
 {
     public class WorksheetWrapper<T>
     {
-        internal string Name { get; set; }
+        internal string Name { get; set; } = default!;
 
         internal bool AppendHeaderRow { get; set; } = true;
 
-        internal ExcelPackage Package { get; set; }
+        internal ExcelPackage Package { get; set; } = default!;
 
-        internal IEnumerable<T> Rows { get; set; }
+        internal IEnumerable<T> Rows { get; set; } = default!;
 
-        internal List<WorksheetColumn<T>> Columns { get; set; }
+        internal List<WorksheetColumn<T>> Columns { get; set; } = default!;
 
-        internal List<WorksheetTitleRow> Titles { get; set; }
+        internal List<WorksheetTitleRow> Titles { get; set; } = default!;
 
         internal ExcelCreateConfiguration<T> Configuration { get; } = ExcelCreateConfiguration<T>.Instance;
 
