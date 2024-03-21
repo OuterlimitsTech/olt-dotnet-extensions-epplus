@@ -64,7 +64,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="columnHeader"></param>
         /// <param name="configureColumn"></param>
         /// <returns></returns>
-        public static WorksheetWrapper<T> WithColumn<T>(this WorksheetWrapper<T> worksheet, Func<T, object> map, string columnHeader, Action<ExcelColumn> configureColumn = null)
+        public static WorksheetWrapper<T> WithColumn<T>(this WorksheetWrapper<T> worksheet, Func<T, object> map, string columnHeader, Action<ExcelColumn>? configureColumn = null)
         {
             worksheet.Columns.Add(new WorksheetColumn<T>
             {
@@ -83,7 +83,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="title"></param>
         /// <param name="configureTitle"></param>
         /// <returns></returns>
-        public static WorksheetWrapper<T> WithTitle<T>(this WorksheetWrapper<T> worksheet, string title, Action<ExcelRange> configureTitle = null)
+        public static WorksheetWrapper<T> WithTitle<T>(this WorksheetWrapper<T> worksheet, string title, Action<ExcelRange>? configureTitle = null)
         {
             if (worksheet.Titles == null)
             {
@@ -132,7 +132,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="addHeaderRow"></param>
         /// <param name="worksheetName"></param>
         /// <returns></returns>
-        public static ExcelPackage ToExcelPackage<T>(this IEnumerable<T> rows, bool addHeaderRow = true, string worksheetName = null)
+        public static ExcelPackage ToExcelPackage<T>(this IEnumerable<T> rows, bool addHeaderRow = true, string? worksheetName = null)
         {
             WorksheetWrapper<T> worksheet = rows.ToWorksheet(string.IsNullOrEmpty(worksheetName) ? typeof(T).GetWorksheetName() : worksheetName);
 
