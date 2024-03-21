@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 using System.Data;
 using System.Drawing;
-using System.Linq;
 
 using OLT.Extensions.EPPlus.Exceptions;
 using OLT.Extensions.EPPlus.Style;
@@ -11,8 +9,6 @@ using FluentAssertions;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
-
-using Xunit;
 
 namespace OLT.Extensions.EPPlus.Tests
 {
