@@ -8,6 +8,7 @@ The owner no longer supports it with no reason given. The codebase worked with E
 | Library                                              | Version                                                                                                                |
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [OLT.Extensions.EPPlus](./src/OLT.Extensions.EPPlus) | [![Nuget](https://img.shields.io/nuget/v/OLT.Extensions.EPPlus)](https://www.nuget.org/packages/OLT.Extensions.EPPlus) |
+| [OLT.EPPlus](./src/OLT.EPPlus/)                      | [![Nuget](https://img.shields.io/nuget/v/OLT.EPPlus)](https://www.nuget.org/packages/OLT.EPPlus)                       |
 
 ##### Basic examples:
 

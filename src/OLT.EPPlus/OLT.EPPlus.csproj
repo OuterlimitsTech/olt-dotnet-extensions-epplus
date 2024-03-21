@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>OLT.EPPlus</RootNamespace>
+    <Description>Provides helper classes and extensions for writing Excel Files using EPPlus</Description>
+    <ProjectGuid>0acb3180-e491-4c1a-a2af-0eff584ec2bc</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
