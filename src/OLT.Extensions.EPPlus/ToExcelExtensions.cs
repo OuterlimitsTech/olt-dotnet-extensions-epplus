@@ -64,7 +64,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="columnHeader"></param>
         /// <param name="configureColumn"></param>
         /// <returns></returns>
-        public static WorksheetWrapper<T> WithColumn<T>(this WorksheetWrapper<T> worksheet, Func<T, object> map, string columnHeader, Action<ExcelColumn> configureColumn = null)
+        public static WorksheetWrapper<T> WithColumn<T>(this WorksheetWrapper<T> worksheet, Func<T, object> map, string columnHeader, Action<ExcelColumn>? configureColumn = null)
         {
             worksheet.Columns.Add(new WorksheetColumn<T>
             {
@@ -83,7 +83,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="title"></param>
         /// <param name="configureTitle"></param>
         /// <returns></returns>
-        public static WorksheetWrapper<T> WithTitle<T>(this WorksheetWrapper<T> worksheet, string title, Action<ExcelRange> configureTitle = null)
+        public static WorksheetWrapper<T> WithTitle<T>(this WorksheetWrapper<T> worksheet, string title, Action<ExcelRange>? configureTitle = null)
         {
             if (worksheet.Titles == null)
             {
@@ -132,7 +132,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="addHeaderRow"></param>
         /// <param name="worksheetName"></param>
         /// <returns></returns>
-        public static ExcelPackage ToExcelPackage<T>(this IEnumerable<T> rows, bool addHeaderRow = true, string worksheetName = null)
+        public static ExcelPackage ToExcelPackage<T>(this IEnumerable<T> rows, bool addHeaderRow = true, string? worksheetName = null)
         {
             WorksheetWrapper<T> worksheet = rows.ToWorksheet(string.IsNullOrEmpty(worksheetName) ? typeof(T).GetWorksheetName() : worksheetName);
 
@@ -195,8 +195,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns>Excel package</returns>
         public static ExcelPackage AsExcelPackage(this Stream stream)
         {
-            NotNull(stream, nameof(stream));
-
+            ArgumentNullException.ThrowIfNull(stream);            
             return new ExcelPackage(stream);
         }
 
@@ -208,7 +207,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns>Excel package</returns>
         public static ExcelPackage AsExcelPackage(this Stream stream, string password)
         {
-            NotNull(stream, nameof(stream));
+            ArgumentNullException.ThrowIfNull(stream);            
             NotNullOrWhiteSpace(password, nameof(password));
 
             return new ExcelPackage(stream, password);

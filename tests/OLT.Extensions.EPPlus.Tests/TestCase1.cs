@@ -84,7 +84,7 @@ namespace OLT.Extensions.EPPlus.Tests
     public class DtoString
     {
         [ExcelTableColumn]
-        public string DateColumn { get; set; }
+        public string? DateColumn { get; set; }
     }
 
     public class PriceInput
@@ -100,7 +100,7 @@ namespace OLT.Extensions.EPPlus.Tests
         public decimal PurchaseCost { get; set; }
 
         [ExcelTableColumn(ColumnNames.Barcode)]
-        public string Barcode { get; set; }
+        public string? Barcode { get; set; }
 
         [ExcelTableColumn(ColumnNames.BuyingPrice)]
         public decimal BuyingPrice { get; set; } = 0;

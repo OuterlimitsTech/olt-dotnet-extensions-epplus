@@ -39,7 +39,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="table"></param>
         /// <param name="configurationAction"></param>
         /// <returns>An enumerable of <see cref="ExcelExceptionArgs" /> containing</returns>
-        public static IEnumerable<ExcelExceptionArgs> Validate<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new()
+        public static IEnumerable<ExcelExceptionArgs> Validate<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new()
         {
             ExcelReadConfiguration<T> configuration = ExcelReadConfiguration<T>.Instance;
             configurationAction?.Invoke(configuration);
@@ -92,7 +92,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="table">Table object to fetch</param>
         /// <param name="configurationAction"></param>
         /// <returns>An enumerable of the generating type</returns>
-        public static IEnumerable<T> AsEnumerable<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new()
+        public static IEnumerable<T> AsEnumerable<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new()
         {
             ExcelReadConfiguration<T> configuration = ExcelReadConfiguration<T>.Instance;
             configurationAction?.Invoke(configuration);
@@ -152,7 +152,7 @@ namespace OLT.Extensions.EPPlus
             }
         }
 
-        public static List<T> ToList<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new() => AsEnumerable(table, configurationAction).ToList();
+        public static List<T> ToList<T>(this ExcelTable table, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new() => AsEnumerable(table, configurationAction).ToList();
 
         /// <summary>
         ///     Checks whether the given table is empty or not
@@ -221,6 +221,7 @@ namespace OLT.Extensions.EPPlus
             }
         }
 
+#pragma warning disable CS8604 // Possible null reference argument.
         /// <summary>
         ///     Tries to set property of item
         /// </summary>
@@ -245,14 +246,16 @@ namespace OLT.Extensions.EPPlus
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty,
                     null,
                     item,
-                    new object[] { cell?.ToString() });
+                    new object?[] { cell?.ToString() });
             }
 
             if (type == typeof(DateTime))
             {
                 if (!DateTime.TryParse(cell?.ToString(), out DateTime parsedDate))
                 {
+#pragma warning disable CS8605 // Unboxing a possibly null value.
                     parsedDate = DateTime.FromOADate((double)cell);
+#pragma warning restore CS8605 // Unboxing a possibly null value.
                 }
 
                 itemType.InvokeMember(
@@ -277,6 +280,7 @@ namespace OLT.Extensions.EPPlus
             {
                 if (cell is string) // Support Enum conversion from string...
                 {
+
                     itemType.InvokeMember(
                         property.Name,
                         BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty,
@@ -304,14 +308,15 @@ namespace OLT.Extensions.EPPlus
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty,
                     null,
                     item,
-                    new [] { cell.ChangeType(type) });
+                    new [] { cell?.ChangeType(type) });
             }
 
             Validator.ValidateProperty(property.GetValue(item), new ValidationContext(item) { MemberName = property.Name });
         }
+#pragma warning restore CS8604 // Possible null reference argument.
 
 
-       private static bool CheckColumnByIndexIfExists(ExcelTable table, int columnIndex, bool isOptional)
+        private static bool CheckColumnByIndexIfExists(ExcelTable table, int columnIndex, bool isOptional)
         {
             try
             {

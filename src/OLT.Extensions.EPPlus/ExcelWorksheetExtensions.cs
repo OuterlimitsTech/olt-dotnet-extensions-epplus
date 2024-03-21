@@ -12,6 +12,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
 using static OLT.Extensions.EPPlus.Helpers.Guard;
+using static OfficeOpenXml.ExcelErrorValue;
 
 namespace OLT.Extensions.EPPlus
 {
@@ -23,7 +24,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="hasHeaderRow"></param>
         /// <returns>ExcelAddress</returns>
-        public static ExcelAddress GetDataBounds(this ExcelWorksheet worksheet, bool hasHeaderRow = true)
+        public static ExcelAddress? GetDataBounds(this ExcelWorksheet worksheet, bool hasHeaderRow = true)
         {
             ExcelAddressBase valuedDimension = worksheet.GetValuedDimension() ?? worksheet.Dimension;
 
@@ -46,9 +47,9 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="hasHeaderRow"></param>
         /// <returns></returns>
-        public static ExcelRange GetExcelRange(this ExcelWorksheet worksheet, bool hasHeaderRow = true)
+        public static ExcelRange? GetExcelRange(this ExcelWorksheet worksheet, bool hasHeaderRow = true)
         {
-            ExcelAddress dataBounds = worksheet.GetDataBounds(hasHeaderRow);
+            ExcelAddress? dataBounds = worksheet.GetDataBounds(hasHeaderRow);
 
             if (dataBounds == null)
             {
@@ -58,7 +59,7 @@ namespace OLT.Extensions.EPPlus
             return worksheet.Cells[dataBounds.Address];
         }
 
-        public static ExcelTable GetTable(this ExcelWorksheet worksheet, string tableName) => worksheet.Tables.FirstOrDefault(x => x.Name == tableName);
+        public static ExcelTable? GetTable(this ExcelWorksheet worksheet, string tableName) => worksheet.Tables.FirstOrDefault(x => x.Name == tableName);
 
         public static ExcelTable GetTable(this ExcelWorksheet worksheet, int tableIndex) => worksheet.Tables[tableIndex];
 
@@ -86,11 +87,16 @@ namespace OLT.Extensions.EPPlus
             if (worksheet.Tables.Any())
             {
                 // Has any table on same addresses
-                ExcelAddress dataBounds = worksheet.GetDataBounds(false);
-                ExcelTable excelTable = worksheet.Tables.FirstOrDefault(x => x.Address.End.Address.Equals(dataBounds.End.Address, StringComparison.OrdinalIgnoreCase));
-                if (excelTable != null)
+                ExcelAddress? dataBounds = worksheet.GetDataBounds(false);
+
+                if (dataBounds != null)
                 {
-                    return excelTable;
+                    ExcelTable? excelTable = worksheet.Tables.FirstOrDefault(x => x.Address.End.Address.Equals(dataBounds.End.Address, StringComparison.OrdinalIgnoreCase));
+                    if (excelTable != null)
+                    {
+                        return excelTable;
+                    }
+
                 }
             }
 
@@ -120,7 +126,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static DataTable ToDataTable(this ExcelWorksheet worksheet, bool hasHeaderRow = true)
         {
-            ExcelAddress dataBounds = worksheet.GetDataBounds(hasHeaderRow);
+            ExcelAddress? dataBounds = worksheet.GetDataBounds(hasHeaderRow);
 
             var dataTable = new DataTable(worksheet.Name);
 
@@ -154,7 +160,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="configurationAction"></param>
         /// <returns></returns>
-        public static IEnumerable<T> AsEnumerable<T>(this ExcelWorksheet worksheet, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new()
+        public static IEnumerable<T> AsEnumerable<T>(this ExcelWorksheet worksheet, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new()
         {
             ExcelReadConfiguration<T> configuration = ExcelReadConfiguration<T>.Instance;
             configurationAction?.Invoke(configuration);
@@ -169,10 +175,10 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="configurationAction"></param>
         /// <returns></returns>
-        public static List<T> ToList<T>(this ExcelWorksheet worksheet, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new() 
+        public static List<T> ToList<T>(this ExcelWorksheet worksheet, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new() 
             => worksheet.AsEnumerable(configurationAction).ToList();
 
-        public static ExcelWorksheet ChangeCellValue(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, object value, Action<ExcelRange> configureCell = null)
+        public static ExcelWorksheet ChangeCellValue(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, object value, Action<ExcelRange>? configureCell = null)
         {
             configureCell?.Invoke(worksheet.Cells[rowIndex, columnIndex]);
             worksheet.Cells[rowIndex, columnIndex].Value = value;
@@ -194,7 +200,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureHeader"></param>
         /// <param name="headerTexts"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddHeader(this ExcelWorksheet worksheet, Action<ExcelRange> configureHeader = null, params string[] headerTexts)
+        public static ExcelWorksheet AddHeader(this ExcelWorksheet worksheet, Action<ExcelRange>? configureHeader = null, params string[] headerTexts)
         {
             if (!headerTexts.Any())
             {
@@ -229,7 +235,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureCells"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, Action<ExcelRange> configureCells = null, params object[] values) => worksheet.AddLine(rowIndex, 1, configureCells, values);
+        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, Action<ExcelRange>? configureCells = null, params object[] values) => worksheet.AddLine(rowIndex, 1, configureCells, values);
 
         /// <summary>
         ///     Appends a line to the worksheet
@@ -240,7 +246,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureCells"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, int startColumnIndex, Action<ExcelRange> configureCells = null, params object[] values)
+        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, int startColumnIndex, Action<ExcelRange>? configureCells = null, params object[] values)
         {
             for (var i = 0; i < values.Length; i++)
             {
@@ -260,15 +266,15 @@ namespace OLT.Extensions.EPPlus
         /// <param name="startColumnIndex"></param>
         /// <param name="configureCells"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex = 1, Action<ExcelRange> configureCells = null)
+        public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex = 1, Action<ExcelRange>? configureCells = null)
         {
-            NotNull(items, nameof(items));
+            ArgumentNullException.ThrowIfNull(items);
 
             for (var i = 0; i < items.Count(); i++)
             {
                 for (int j = startColumnIndex; j < startColumnIndex + typeof(T).GetProperties().Length; j++)
                 {
-                    worksheet.AddLine(i + startRowIndex, j, configureCells, items.ElementAt(i).GetPropertyValue(typeof(T).GetProperties()[j - startColumnIndex].Name));
+                    worksheet.AddLine(i + startRowIndex, j, configureCells, items.ElementAt(i)!.GetPropertyValue(typeof(T).GetProperties()[j - startColumnIndex].Name));
                 }
             }
 
@@ -297,9 +303,9 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureCells"></param>
         /// <param name="propertySelectors"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex, Action<ExcelRange> configureCells = null, params Func<T, object>[] propertySelectors)
+        public static ExcelWorksheet AddObjects<T>(this ExcelWorksheet worksheet, IEnumerable<T> items, int startRowIndex, int startColumnIndex, Action<ExcelRange>? configureCells = null, params Func<T, object>[] propertySelectors)
         {
-            NotNull(propertySelectors, nameof(propertySelectors));
+            ArgumentNullException.ThrowIfNull(propertySelectors);
 
             for (var i = 0; i < items.Count(); i++)
             {
@@ -320,7 +326,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static IEnumerable<KeyValuePair<int, string>> GetColumns(this ExcelWorksheet worksheet, int rowIndex)
         {
-            ExcelAddressBase valuedDimension = worksheet.GetValuedDimension();
+            ExcelAddressBase? valuedDimension = worksheet.GetValuedDimension();
 
             if (valuedDimension == null)
             {
@@ -338,7 +344,7 @@ namespace OLT.Extensions.EPPlus
             return worksheet.GetColumns(rowIndex).Where(x => x.Value.Equals(columnText, stringComparison)).IsGreaterThanOne();
         }
 
-        public static void CheckAndThrowIfDuplicatedColumnsFound(this ExcelWorksheet worksheet, int rowIndex, string exceptionMessage = null)
+        public static void CheckAndThrowIfDuplicatedColumnsFound(this ExcelWorksheet worksheet, int rowIndex, string? exceptionMessage = null)
         {
             foreach (KeyValuePair<int, string> column in worksheet.GetColumns(rowIndex).Where(x => !string.IsNullOrEmpty(x.Value)))
             {
@@ -346,7 +352,7 @@ namespace OLT.Extensions.EPPlus
             }
         }
 
-        public static void CheckAndThrowIfDuplicatedColumnsFound<T>(this ExcelWorksheet worksheet, int rowIndex, string exceptionMessage = null)
+        public static void CheckAndThrowIfDuplicatedColumnsFound<T>(this ExcelWorksheet worksheet, int rowIndex, string? exceptionMessage = null)
         {
             List<ExcelTableColumnDetails> propertyInfoAndColumnAttributes = typeof(T).GetExcelTableColumnAttributesWithPropertyInfo();
 
@@ -364,15 +370,19 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static ExcelWorksheet DeleteColumn(this ExcelWorksheet worksheet, string headerText)
         {
-            ExcelAddressBase valuedDimension = worksheet.GetValuedDimension();
+            ExcelAddressBase? valuedDimension = worksheet.GetValuedDimension();
 
-            ExcelRangeBase headerColumn = worksheet.Cells[valuedDimension.Start.Row, valuedDimension.Start.Column, valuedDimension.Start.Row, valuedDimension.End.Column].FirstOrDefault(x => x.Text.Equals(headerText, StringComparison.InvariantCultureIgnoreCase));
+            if (valuedDimension == null)
+            {
+                return worksheet;
+            }
+
+            ExcelRangeBase? headerColumn = worksheet.Cells[valuedDimension.Start.Row, valuedDimension.Start.Column, valuedDimension.Start.Row, valuedDimension.End.Column].FirstOrDefault(x => x.Text.Equals(headerText, StringComparison.InvariantCultureIgnoreCase));
 
             if (headerColumn != null)
             {
                 worksheet.DeleteColumn(headerColumn.Start.Column);
             }
-
             return worksheet;
         }
 
@@ -384,7 +394,12 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static ExcelWorksheet DeleteColumns(this ExcelWorksheet worksheet, string headerText)
         {
-            ExcelAddressBase valuedDimension = worksheet.GetValuedDimension();
+            ExcelAddressBase? valuedDimension = worksheet.GetValuedDimension();
+
+            if (valuedDimension == null)
+            {
+                return worksheet;
+            }
 
             int count = worksheet.Cells[valuedDimension.Start.Row, valuedDimension.Start.Column, valuedDimension.Start.Row, valuedDimension.End.Column].Count(x => x.Text.Equals(headerText, StringComparison.InvariantCultureIgnoreCase));
 
@@ -404,7 +419,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="columnIndex"></param>
         /// <param name="expectedValue"></param>
         /// <param name="exceptionMessage">Custom exception message with format parameters: columnIndex, expectedValue</param>
-        public static void CheckColumnAndThrow(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, string expectedValue, string exceptionMessage = null)
+        public static void CheckColumnAndThrow(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, string expectedValue, string? exceptionMessage = null)
         {
             if (worksheet.GetColumns(rowIndex).Any(x => x.Value == expectedValue && x.Key == columnIndex))
             {
@@ -440,7 +455,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="headerRowIndex"></param>
         /// <param name="formattedExceptionMessage"></param>
-        public static void CheckHeadersAndThrow<T>(this ExcelWorksheet worksheet, int headerRowIndex, string formattedExceptionMessage = null)
+        public static void CheckHeadersAndThrow<T>(this ExcelWorksheet worksheet, int headerRowIndex, string? formattedExceptionMessage = null)
         {
             List<ExcelTableColumnDetails> propertyInfoAndColumnAttributes = typeof(T).GetExcelTableColumnAttributesWithPropertyInfo();
 
@@ -464,7 +479,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         public static bool IsCellEmpty(this ExcelWorksheet worksheet, int rowIndex, int columnIndex)
         {
-            object value = worksheet.Cells[rowIndex, columnIndex, rowIndex, columnIndex]?.Value;
+            object? value = worksheet.Cells[rowIndex, columnIndex, rowIndex, columnIndex]?.Value;
             return string.IsNullOrWhiteSpace(value?.ToString());
         }
 
@@ -473,7 +488,7 @@ namespace OLT.Extensions.EPPlus
         /// </summary>
         /// <param name="worksheet"></param>
         /// <returns></returns>
-        public static ExcelAddressBase GetValuedDimension(this ExcelWorksheet worksheet)
+        public static ExcelAddressBase? GetValuedDimension(this ExcelWorksheet worksheet)
         {
             ExcelAddressBase dimension = worksheet.Dimension;
 
@@ -523,7 +538,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheet"></param>
         /// <param name="rowIndex"></param>
         /// <param name="exceptionMessage"></param>
-        public static void CheckExistenceOfColumnsAndThrow<T>(this ExcelWorksheet worksheet, int rowIndex, string exceptionMessage = null)
+        public static void CheckExistenceOfColumnsAndThrow<T>(this ExcelWorksheet worksheet, int rowIndex, string? exceptionMessage = null)
         {
             List<ExcelTableColumnDetails> propertyInfoAndColumnAttributes = typeof(T).GetExcelTableColumnAttributesWithPropertyInfo();
             List<KeyValuePair<int, string>> columns = worksheet.GetColumns(rowIndex).ToList();
@@ -537,7 +552,7 @@ namespace OLT.Extensions.EPPlus
             }
         }
 
-        private static void CheckAndThrowIfDuplicatedColumnsFound(ExcelWorksheet worksheet, int rowIndex, string exceptionMessage, string columnName)
+        private static void CheckAndThrowIfDuplicatedColumnsFound(ExcelWorksheet worksheet, int rowIndex, string? exceptionMessage, string columnName)
         {
             if (!worksheet.IsColumnDuplicatedOnRow(rowIndex, columnName))
             {

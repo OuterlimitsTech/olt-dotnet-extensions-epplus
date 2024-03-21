@@ -12,26 +12,26 @@ namespace OLT.Extensions.EPPlus.Exceptions
         /// <summary>
         ///     Property that was tried to set
         /// </summary>
-        public string PropertyName { get; set; }
+        public string? PropertyName { get; set; }
 
         /// <summary>
         ///     Column that was mapped to this property
         /// </summary>
-        public string ColumnName { get; set; }
+        public string? ColumnName { get; set; }
 
         /// <summary>
         ///     Type of the property
         /// </summary>
-        public Type ExpectedType { get; set; }
+        public Type? ExpectedType { get; set; }
 
         /// <summary>
         ///     Cell value returned by EPPlus
         /// </summary>
-        public object CellValue { get; set; }
+        public object? CellValue { get; set; }
 
         /// <summary>
         ///     Absolute address of the cell, where the conversion error occured
         /// </summary>
-        public ExcelCellAddress CellAddress { get; set; }
+        public ExcelCellAddress? CellAddress { get; set; }
     }
 }
