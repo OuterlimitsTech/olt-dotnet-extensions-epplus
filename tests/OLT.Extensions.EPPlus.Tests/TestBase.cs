@@ -14,6 +14,8 @@ namespace OLT.Extensions.EPPlus.Tests
 
         protected TestBase()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             ExcelPackage1 = new ExcelPackage(typeof(TestBase).GetTypeInfo().Assembly.GetManifestResourceStream(ResourceName1));
             ExcelPackage2 = new ExcelPackage(typeof(TestBase).GetTypeInfo().Assembly.GetManifestResourceStream(ResourceName2));
         }

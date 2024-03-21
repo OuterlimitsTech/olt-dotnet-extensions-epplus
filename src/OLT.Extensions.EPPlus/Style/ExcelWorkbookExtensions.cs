@@ -9,7 +9,7 @@ using static OLT.Extensions.EPPlus.Helpers.Guard;
 
 namespace OLT.Extensions.EPPlus.Style
 {
-    public static class ExcelWorkbookExtensions
+    public static class ExcelWorkbookStyleExtensions
     {
         /// <summary>
         ///     Creates a named style on the Excel workbook. If the named style is already exists then throws the <see cref="ArgumentException"/>

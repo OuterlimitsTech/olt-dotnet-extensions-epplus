@@ -11,7 +11,7 @@ namespace OLT.Extensions.EPPlus.Helpers
         private const string ErrorMessage = "Value must not be empty";
 
         [DebuggerStepThrough]
-        private static void NotNull<T>(T value, string parameterName)
+        private static void NotNull<T>(T value, string parameterName) where T: class
         {
             if (value == null)
             {

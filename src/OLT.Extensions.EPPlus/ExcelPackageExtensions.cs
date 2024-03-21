@@ -26,7 +26,7 @@ namespace OLT.Extensions.EPPlus
         /// </summary>
         /// <param name="package"></param>
         /// <param name="tableName"></param>
-        public static ExcelTable GetTable(this ExcelPackage package, string tableName)
+        public static ExcelTable? GetTable(this ExcelPackage package, string tableName)
         {
             return package.GetAllTables().FirstOrDefault(t => t.Name.Equals(tableName, StringComparison.InvariantCultureIgnoreCase));
         }
