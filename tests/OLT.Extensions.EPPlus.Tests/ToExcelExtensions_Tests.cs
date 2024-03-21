@@ -96,12 +96,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             ExcelPackage package = pre50
                 .ToWorksheet("< 1950")
-                .WithColumn(x => x.FirstName, "First Name")
-                .WithColumn(x => x.LastName, "Last Name")
+                .WithColumn(x => x.FirstName!, "First Name")
+                .WithColumn(x => x.LastName!, "Last Name")
                 .WithColumn(x => x.YearBorn, "Year of Birth")
                 .WithTitle("< 1950")
                 .NextWorksheet(post50, "> 1950")
-                .WithColumn(x => x.LastName, "Last Name")
+                .WithColumn(x => x.LastName!, "Last Name")
                 .WithColumn(x => x.YearBorn, "Year of Birth")
                 .WithTitle("> 1950")
                 .ToExcelPackage();
@@ -633,7 +633,7 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             package = _personList
                 .ToWorksheet("Actors")
-                .WithColumn(x => x.LastName, "Last Name")
+                .WithColumn(x => x.LastName!, "Last Name")
                 .ToExcelPackage();
 
             //-----------------------------------------------------------------------------------------------------------

@@ -26,7 +26,7 @@ namespace OLT.Extensions.EPPlus
         /// </summary>
         /// <param name="package"></param>
         /// <param name="tableName"></param>
-        public static ExcelTable GetTable(this ExcelPackage package, string tableName)
+        public static ExcelTable? GetTable(this ExcelPackage package, string tableName)
         {
             return package.GetAllTables().FirstOrDefault(t => t.Name.Equals(tableName, StringComparison.InvariantCultureIgnoreCase));
         }
@@ -67,7 +67,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configurationAction"></param>
         /// <param name="worksheetIndex"></param>
         /// <returns></returns>    
-        public static IEnumerable<T> AsEnumerable<T>(this ExcelPackage package, int worksheetIndex = 0, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new() => package.GetWorksheet(worksheetIndex).AsEnumerable(configurationAction);
+        public static IEnumerable<T> AsEnumerable<T>(this ExcelPackage package, int worksheetIndex = 0, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new() => package.GetWorksheet(worksheetIndex).AsEnumerable(configurationAction);
 
         /// <summary>
         ///     Converts given package into list of objects
@@ -77,13 +77,13 @@ namespace OLT.Extensions.EPPlus
         /// <param name="worksheetIndex"></param>
         /// <param name="configurationAction"></param>
         /// <returns></returns>
-        public static List<T> ToList<T>(this ExcelPackage package, int worksheetIndex = 0, Action<ExcelReadConfiguration<T>> configurationAction = null) where T : new() => package.AsEnumerable(worksheetIndex, configurationAction).ToList();
+        public static List<T> ToList<T>(this ExcelPackage package, int worksheetIndex = 0, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new() => package.AsEnumerable(worksheetIndex, configurationAction).ToList();
 
         public static ExcelWorksheet AddWorksheet(this ExcelPackage package, string worksheetName) => package.Workbook.Worksheets.Add(worksheetName);
 
         public static ExcelWorksheet AddWorksheet(this ExcelPackage package, string worksheetName, ExcelWorksheet copyWorksheet) => package.Workbook.Worksheets.Add(worksheetName, copyWorksheet);
 
-        public static ExcelWorksheet GetWorksheet(this ExcelPackage package, string worksheetName) => package.Workbook.GetWorksheet(worksheetName);
+        public static ExcelWorksheet? GetWorksheet(this ExcelPackage package, string worksheetName) => package.Workbook.GetWorksheet(worksheetName);
 
         public static ExcelWorksheet GetWorksheet(this ExcelPackage package, int worksheetIndex) => package.Workbook.GetWorksheet(worksheetIndex);
     }

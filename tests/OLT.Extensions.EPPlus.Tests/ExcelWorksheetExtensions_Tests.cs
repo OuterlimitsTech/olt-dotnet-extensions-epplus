@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 using System.Data;
 using System.Drawing;
-using System.Linq;
 
 using OLT.Extensions.EPPlus.Exceptions;
 using OLT.Extensions.EPPlus.Style;
@@ -12,10 +10,9 @@ using FluentAssertions;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-using Xunit;
-
 namespace OLT.Extensions.EPPlus.Tests
 {
+
     public class ExcelWorksheetExtensionsTests : TestBase
     {
         [Fact]
@@ -143,8 +140,8 @@ namespace OLT.Extensions.EPPlus.Tests
             list.Last().Barcode.Should().Be("barcode123");
             list.Last().Quantity.Should().Be(5);
             list.Last().UpdatedDate.HasValue.Should().BeTrue();
-            list.Last().UpdatedDate.Value.Date.Should().Be(dateTime.Date);
-            list.Last().UpdatedDate.Value.Hour.Should().Be(dateTime.Hour);
+            list.Last().UpdatedDate?.Date.Should().Be(dateTime.Date);
+            list.Last().UpdatedDate?.Hour.Should().Be(dateTime.Hour);
         }
 
         [Fact]
@@ -577,7 +574,7 @@ namespace OLT.Extensions.EPPlus.Tests
             // Act
             //-----------------------------------------------------------------------------------------------------------
             List<StocksNullable> results = worksheet.ToList<StocksNullable>(configuration =>
-                                                                            configuration.Intercept((item, row) => { item.Barcode = item.Barcode.Trim(); })
+                                                                            configuration.Intercept((item, row) => { item.Barcode = item.Barcode?.Trim(); })
                 );
 
             //-----------------------------------------------------------------------------------------------------------
@@ -636,10 +633,10 @@ namespace OLT.Extensions.EPPlus.Tests
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             nullableStocks[0].UpdatedDate.HasValue.Should().Be(true);
-            nullableStocks[0].UpdatedDate.Value.Date.Should().Be(new DateTime(2017, 08, 08));
+            nullableStocks[0].UpdatedDate?.Date.Should().Be(new DateTime(2017, 08, 08));
 
             nullableStocks[1].UpdatedDate.HasValue.Should().Be(true);
-            nullableStocks[1].UpdatedDate.Value.Should().Be(new DateTime(2016, 11, 03, 01, 30, 53));
+            nullableStocks[1].UpdatedDate?.Should().Be(new DateTime(2016, 11, 03, 01, 30, 53));
         }
 
         [Fact]
