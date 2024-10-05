@@ -4,11 +4,11 @@ namespace OLT.Extensions.EPPlus.Attributes
 {
     internal class ExcelTableColumnDetails
     {
-        public ExcelTableColumnDetails(int columnPosition, PropertyInfo propertyInfo, ExcelTableColumnAttribute columnAttribute)
+        public ExcelTableColumnDetails(int columnPosition, PropertyInfo propertyInfo, ExcelTableColumnAttribute? columnAttribute)
         {
             ColumnPosition = columnPosition;
             PropertyInfo = propertyInfo;
-            ColumnAttribute = columnAttribute;
+            ColumnAttribute = columnAttribute ?? new ExcelTableColumnAttribute();
         }
 
         public PropertyInfo PropertyInfo { get; }

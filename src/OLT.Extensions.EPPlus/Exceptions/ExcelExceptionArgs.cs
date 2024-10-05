@@ -32,6 +32,6 @@ namespace OLT.Extensions.EPPlus.Exceptions
         /// <summary>
         ///     Absolute address of the cell, where the conversion error occured
         /// </summary>
-        public ExcelCellAddress? CellAddress { get; set; }
+        public ExcelCellAddress CellAddress { get; set; } = new ExcelCellAddress();
     }
 }

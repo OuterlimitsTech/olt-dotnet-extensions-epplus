@@ -31,7 +31,7 @@ namespace OLT.Extensions.EPPlus.Tests
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             ExcelPackage1.GetWorksheet(randomName).Should().NotBe(null);
-            ExcelPackage1.GetWorksheet(randomName).Cells[1, 1, 3, 3].Value.Should().BeEquivalentTo(copyWorksheet.Cells[1, 1, 3, 3].Value);
+            ExcelPackage1.GetWorksheet(randomName)?.Cells[1, 1, 3, 3].Value.Should().BeEquivalentTo(copyWorksheet.Cells[1, 1, 3, 3].Value);
         }
 
         [Fact]
@@ -158,7 +158,7 @@ namespace OLT.Extensions.EPPlus.Tests
             ExcelPackage1.HasTable("TEST2").Should().BeTrue("We have TEST2 table");
             ExcelPackage1.HasTable("test2").Should().BeTrue("Table names are case insensitive");
 
-            ExcelPackage1.GetWorksheet("TEST2").GetTable("TEST2").Should().BeEquivalentTo(ExcelPackage1.GetTable("TEST2"), "We are accessing the same objects");
+            ExcelPackage1.GetWorksheet("TEST2")?.GetTable("TEST2").Should().BeEquivalentTo(ExcelPackage1.GetTable("TEST2"), "We are accessing the same objects");
 
             ExcelPackage1.HasTable("NOTABLE").Should().BeFalse("We don't have NOTABLE table");
             ExcelPackage1.GetTable("NOTABLE").Should().BeNull("We don't have NOTABLE table");
@@ -171,8 +171,8 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelWorksheet worksheetWithOptionalColumns = ExcelPackage1.GetWorksheet("WithOptionalFields");
-            var list = worksheetWithOptionalColumns.ToList<ExcelWithOptionalFields>();
+            ExcelWorksheet? worksheetWithOptionalColumns = ExcelPackage1.GetWorksheet("WithOptionalFields");
+            var list = worksheetWithOptionalColumns?.ToList<ExcelWithOptionalFields>() ?? new List<ExcelWithOptionalFields>();
             const string expectedWorksheetName = "worksheet-name";
 
             //-----------------------------------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ namespace OLT.Extensions.EPPlus.Tests
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             var generatedWorksheet = result.GetWorksheet(expectedWorksheetName);
-            generatedWorksheet.ToList<ExcelWithOptionalFields>().Count.Should().Be(2);
+            generatedWorksheet?.ToList<ExcelWithOptionalFields>().Count.Should().Be(2);
         }
     }
 }

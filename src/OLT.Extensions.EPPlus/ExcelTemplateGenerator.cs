@@ -19,7 +19,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="typeName"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public static ExcelPackage GenerateExcelPackage(this Assembly executingAssembly, string typeName, Action<ExcelRange> action = null)
+        public static ExcelPackage GenerateExcelPackage(this Assembly executingAssembly, string typeName, Action<ExcelRange>? action = null)
         {
             var excelPackage = new ExcelPackage();
             excelPackage.GenerateWorksheet(executingAssembly, typeName, action);
@@ -34,15 +34,15 @@ namespace OLT.Extensions.EPPlus
         /// <param name="typeName"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public static ExcelWorksheet GenerateWorksheet(this ExcelPackage excelPackage, Assembly executingAssembly, string typeName, Action<ExcelRange> action = null)
+        public static ExcelWorksheet GenerateWorksheet(this ExcelPackage excelPackage, Assembly executingAssembly, string typeName, Action<ExcelRange>? action = null)
         {
-            Type type = executingAssembly.GetExcelWorksheetMarkedTypeByName(typeName);
+            Type? type = executingAssembly.GetExcelWorksheetMarkedTypeByName(typeName);
 
             ThrowIfConditionMet(type == null, "The '{0}' type could not found in the assembly.", typeName);
             
-            List<ExcelTableColumnDetails> headerColumns = type.GetExcelTableColumnAttributesWithPropertyInfo();
+            List<ExcelTableColumnDetails> headerColumns = type?.GetExcelTableColumnAttributesWithPropertyInfo() ?? new List<ExcelTableColumnDetails>();
 
-            ExcelWorksheet worksheet = excelPackage.AddWorksheet(type.GetWorksheetName() ?? typeName);
+            ExcelWorksheet worksheet = excelPackage.AddWorksheet(type?.GetWorksheetName() ?? typeName);
 
             for (var i = 0; i < headerColumns.Count; i++)
             {

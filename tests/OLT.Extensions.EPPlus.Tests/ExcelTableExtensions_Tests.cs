@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using OLT.Extensions.EPPlus.Attributes;
+﻿using OLT.Extensions.EPPlus.Attributes;
 using OLT.Extensions.EPPlus.Exceptions;
-
 using FluentAssertions;
-
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
-
-using Xunit;
 
 namespace OLT.Extensions.EPPlus.Tests
 {
@@ -22,12 +14,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<DefaultMap> list = table.ToList<DefaultMap>();
+            List<DefaultMap> list = table?.ToList<DefaultMap>() ?? new List<DefaultMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -43,12 +35,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetTable("TEST3");
+            ExcelTable? table = ExcelPackage1.GetTable("TEST3");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<Cars> list = table.ToList<Cars>();
+            List<Cars> list = table?.ToList<Cars>() ?? new List<Cars>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -79,12 +71,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table1 = ExcelPackage1.GetWorksheet("TEST2").GetTable(0);  
+            ExcelTable? table1 = ExcelPackage1.GetWorksheet("TEST2")?.GetTable(0);
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<CarNullable> list = table1.ToList<CarNullable>();
+            List<CarNullable> list = table1?.ToList<CarNullable>() ?? new List<CarNullable>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -99,12 +91,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<DateMap> list = table.ToList<DateMap>();
+            List<DateMap> list = table?.ToList<DateMap>() ?? new List<DateMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -122,19 +114,19 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6").AsExcelTable(false);
+            ExcelTable? tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6")?.AsExcelTable(false);
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            ExcelAddress dataBoundsIncludingHeader = tableWithoutHeaderRow.GetDataBounds();
+            ExcelAddress? dataBoundsIncludingHeader = tableWithoutHeaderRow?.GetDataBounds();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //----------------------------------------------------------------------------------------------------------- 
-            dataBoundsIncludingHeader.Start.Row.Should().Be(2);
-            dataBoundsIncludingHeader.End.Row.Should().Be(5);
-            dataBoundsIncludingHeader.Address.Should().Be("A2:C5");
+            dataBoundsIncludingHeader?.Start.Row.Should().Be(2);
+            dataBoundsIncludingHeader?.End.Row.Should().Be(5);
+            dataBoundsIncludingHeader?.Address.Should().Be("A2:C5");
         }
 
         [Fact]
@@ -143,19 +135,19 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable tableWithHeaderRow = ExcelPackage1.GetWorksheet("TEST6").AsExcelTable();
+            ExcelTable? tableWithHeaderRow = ExcelPackage1.GetWorksheet("TEST6")?.AsExcelTable();
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            ExcelAddress dataBoundsWithoutHeader = tableWithHeaderRow.GetDataBounds();
+            ExcelAddress? dataBoundsWithoutHeader = tableWithHeaderRow?.GetDataBounds();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
-            dataBoundsWithoutHeader.Start.Row.Should().Be(3);
-            dataBoundsWithoutHeader.End.Row.Should().Be(5);
-            dataBoundsWithoutHeader.Address.Should().Be("A3:C5");
+            dataBoundsWithoutHeader?.Start.Row.Should().Be(3);
+            dataBoundsWithoutHeader?.End.Row.Should().Be(5);
+            dataBoundsWithoutHeader?.Address.Should().Be("A3:C5");
         }
 
         [Fact]
@@ -164,12 +156,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6").AsExcelTable(false);
+            ExcelTable? tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6")?.AsExcelTable(false);
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            IEnumerable<StocksNullable> result = tableWithoutHeaderRow.AsEnumerable<StocksNullable>(c => c.SkipCastingErrors());
+            IEnumerable<StocksNullable> result = tableWithoutHeaderRow?.AsEnumerable<StocksNullable>(c => c.SkipCastingErrors()) ?? new List<StocksNullable>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -186,12 +178,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<MultiMap> list = table.ToList<MultiMap>();
+            List<MultiMap> list = table?.ToList<MultiMap>() ?? new List<MultiMap>();
             MultiMap m = list.First(x => x.Class == Classes.Ten);
             MultiMap n = list.First(x => x.Class == Classes.Nine);
 
@@ -210,12 +202,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable(0);
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable(0);
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<EnumByteMap> list = table.ToList<EnumByteMap>();
+            List<EnumByteMap> list = table?.ToList<EnumByteMap>() ?? new List<EnumByteMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -231,12 +223,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<IndexMap> list = table.ToList<IndexMap>();
+            List<IndexMap> list = table?.ToList<IndexMap>() ?? new List<IndexMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -252,12 +244,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<NamedMap> list = table.ToList<NamedMap>();
+            List<NamedMap> list = table?.ToList<NamedMap>() ?? new List<NamedMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -274,12 +266,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<EnumStringMap> list = table.ToList<EnumStringMap>();
+            List<EnumStringMap> list = table?.ToList<EnumStringMap>() ?? new List<EnumStringMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -295,12 +287,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST4").Tables["TEST4"];
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST4")?.Tables["TEST4"];
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<StocksNullable> list = table.ToList<StocksNullable>(configuration => configuration.SkipCastingErrors());
+            List<StocksNullable> list = table?.ToList<StocksNullable>(configuration => configuration.SkipCastingErrors()) ?? new List<StocksNullable>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -316,12 +308,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<EnumFailMap> list = table.ToList<EnumFailMap>(configuration => configuration.SkipCastingErrors());
+            List<EnumFailMap> list = table?.ToList<EnumFailMap>(configuration => configuration.SkipCastingErrors()) ?? new List<EnumFailMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -357,12 +349,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST6").AsExcelTable();
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST6")?.AsExcelTable();
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            bool result = table.IsEmpty();
+            bool? result = table?.IsEmpty() ?? null;
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -376,12 +368,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6").AsExcelTable(false);
+            ExcelTable? tableWithoutHeaderRow = ExcelPackage1.GetWorksheet("TEST6")?.AsExcelTable(false);
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------    
-            Action act = () => tableWithoutHeaderRow.AsEnumerable<StocksNullable>(c => c.WithCastingExceptionMessage("Casting error occured on '{1}'")).ToList();
+            Action act = () => tableWithoutHeaderRow?.AsEnumerable<StocksNullable>(c => c.WithCastingExceptionMessage("Casting error occured on '{1}'")).ToList();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -395,12 +387,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            Action action = () => table.ToList<ObjectWithoutExcelTableAttributes>();
+            Action action = () => table?.ToList<ObjectWithoutExcelTableAttributes>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -414,11 +406,11 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            Action action = () => table.ToList<EnumFailMap>();
+            Action action = () => table?.ToList<EnumFailMap>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -442,13 +434,13 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetWorksheet("TEST1").GetTable("TEST1");  
+            ExcelTable? table = ExcelPackage1.GetWorksheet("TEST1")?.GetTable("TEST1");  
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            Action action1 = () => table.ToList<ObjectWithWrongAttributeMappings>();
-            Action action2 = () => table.ToList<ObjectWithWrongAttributeMappings>(cfg => cfg.WithHeaderValidationExceptionMessage("'{0}' column not found."));
+            Action action1 = () => table?.ToList<ObjectWithWrongAttributeMappings>();
+            Action action2 = () => table?.ToList<ObjectWithWrongAttributeMappings>(cfg => cfg.WithHeaderValidationExceptionMessage("'{0}' column not found."));
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
@@ -463,12 +455,12 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelTable table = ExcelPackage1.GetTable("TEST3");
+            ExcelTable? table = ExcelPackage1.GetTable("TEST3");
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            List<ExcelExceptionArgs> validationResults = table.Validate<WrongCars>().ToList();
+            List<ExcelExceptionArgs> validationResults = table?.Validate<WrongCars>().ToList() ?? new List<ExcelExceptionArgs>();
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert

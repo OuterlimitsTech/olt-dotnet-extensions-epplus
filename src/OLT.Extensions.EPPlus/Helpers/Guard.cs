@@ -11,7 +11,7 @@ namespace OLT.Extensions.EPPlus.Helpers
         private const string ErrorMessage = "Value must not be empty";
 
         [DebuggerStepThrough]
-        private static void NotNull<T>(T value, string parameterName) where T: class
+        private static void NotNull<T>(T? value, string parameterName) where T: class
         {
             if (value == null)
             {
@@ -31,7 +31,7 @@ namespace OLT.Extensions.EPPlus.Helpers
         }
 
         [DebuggerStepThrough]
-        public static void NotNullOrWhiteSpace(string value, string name)
+        public static void NotNullOrWhiteSpace(string? value, string name)
         {
             NotNullOrEmpty(value, name);
 
@@ -51,11 +51,11 @@ namespace OLT.Extensions.EPPlus.Helpers
         }
 
         [DebuggerStepThrough]
-        private static void NotNullOrEmpty(string value, string name)
+        private static void NotNullOrEmpty(string? value, string name)
         {
             NotNull(value, name);
 
-            if (value.Length == 0)
+            if (value?.Length == 0)
             {
                 throw new ArgumentException(ErrorMessage, name);
             }

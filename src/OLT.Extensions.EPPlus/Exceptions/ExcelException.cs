@@ -32,7 +32,7 @@ namespace OLT.Extensions.EPPlus.Exceptions
         /// <summary>
         ///     Exception arguments
         /// </summary>
-        public ExcelExceptionArgs Args { get; protected set; }
+        public ExcelExceptionArgs Args { get; protected set; } = new ExcelExceptionArgs();
 
         /// <summary>
         ///     Sets exception arguments
