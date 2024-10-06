@@ -669,9 +669,9 @@ namespace OLT.Extensions.EPPlus.Tests
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             var worksheet = package.GetWorksheet(worksheetName);
-            worksheet.Cells[1, 1].Value.Should().Be("title 1");
-            worksheet.Cells[2, 1].Value.Should().Be("title 2");
-            worksheet.Cells[3, 1].Value.Should().Be("title 3");
+            worksheet?.Cells[1, 1].Value.Should().Be("title 1");
+            worksheet?.Cells[2, 1].Value.Should().Be("title 2");
+            worksheet?.Cells[3, 1].Value.Should().Be("title 3");
         }
     }
 }
