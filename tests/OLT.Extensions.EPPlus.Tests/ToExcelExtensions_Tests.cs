@@ -139,7 +139,7 @@ namespace OLT.Extensions.EPPlus.Tests
                 .ToWorksheet("< 1950")
                 .WithConfiguration(configuration =>
                                    configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Purple))
-                                                .WithHeaderConfiguration(x => x.SetFontName("Arial")                                                        
+                                                .WithHeaderConfiguration(x => x.SetFontName("Arial")
                                                                                //.SetFont(new Font("Arial", 13, FontStyle.Bold))                                                                               
                                                                                .SetFontAsBold()
                                                                                .SetFontSize(13)
@@ -148,34 +148,34 @@ namespace OLT.Extensions.EPPlus.Tests
                                                 .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
                                                                                   .SetFontName("Verdana"))
                                                 .WithCellConfiguration((x, y) =>
-                                                                       {
-                                                                           x.SetFontName("Times New Roman");
-                                                                           x.SetFontSize(13);
-                                                                           //x.SetFont(new Font("Times New Roman", 13));
-                                                                           y.YearBorn = y.YearBorn % 2 == 0 ? y.YearBorn : 1990;
-                                                                       })
+                                                {
+                                                    x.SetFontName("Times New Roman");
+                                                    x.SetFontSize(13);
+                                                    //x.SetFont(new Font("Times New Roman", 13));
+                                                    y.YearBorn = y.YearBorn % 2 == 0 ? y.YearBorn : 1990;
+                                                })
                                                 .WithTitleConfiguration(x => x.SetBackgroundColor(Color.Yellow))
                 )
                 .WithTitle("< 1950")
                 .NextWorksheet(post50, "> 1950")
                 .WithConfiguration(configuration =>
-                                   {
-                                       configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Black))
-                                                    .WithHeaderConfiguration(x =>
-                                                                             {
-                                                                                 x.Style.Font.Bold = true;
-                                                                                 x.Style.Font.Size = 11;
-                                                                                 x.SetFontColor(Color.White);
-                                                                                 x.SetBackgroundColor(Color.Black, ExcelFillStyle.Solid);
-                                                                             })
-                                                    .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
-                                                                                      .SetFontName("Verdana"))
-                                                    .WithCellConfiguration((x, y) =>
-                                                                           {
-                                                                               x.SetFontName("Times New Roman");
-                                                                               y.YearBorn = y.YearBorn % 2 != 0 ? y.YearBorn : 1990;
-                                                                           });
-                                   })
+                {
+                    configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Black))
+                                 .WithHeaderConfiguration(x =>
+                                 {
+                                     x.Style.Font.Bold = true;
+                                     x.Style.Font.Size = 11;
+                                     x.SetFontColor(Color.White);
+                                     x.SetBackgroundColor(Color.Black, ExcelFillStyle.Solid);
+                                 })
+                                 .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
+                                                                   .SetFontName("Verdana"))
+                                 .WithCellConfiguration((x, y) =>
+                                 {
+                                     x.SetFontName("Times New Roman");
+                                     y.YearBorn = y.YearBorn % 2 != 0 ? y.YearBorn : 1990;
+                                 });
+                })
                 .WithoutHeader()
                 .WithTitle("> 1950")
                 .ToExcelPackage();

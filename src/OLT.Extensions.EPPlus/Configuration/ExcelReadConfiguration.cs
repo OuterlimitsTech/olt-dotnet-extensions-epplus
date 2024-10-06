@@ -16,7 +16,7 @@ namespace OLT.Extensions.EPPlus.Configuration
 
         public virtual bool ThrowCastingExceptions { get; private set; } = true;
 
-        public virtual OnCaught<T> OnCaught { get; private set; }
+        public virtual OnCaught<T>? OnCaught { get; private set; }
 
         public virtual ExcelReadConfiguration<T> WithCastingExceptionMessage(string message)
         {

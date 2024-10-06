@@ -14,8 +14,8 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelAddressBase address = ExcelPackage1.GetWorksheet("TEST7").GetValuedDimension();
-            ExcelAddressBase address2 = ExcelPackage1.Workbook.Worksheets.Add(GetRandomName()).ChangeCellValue(1, 1,"").GetValuedDimension();
+            ExcelAddressBase? address = ExcelPackage1.GetWorksheet("TEST7")?.GetValuedDimension();
+            ExcelAddressBase? address2 = ExcelPackage1.Workbook.Worksheets.Add(GetRandomName()).ChangeCellValue(1, 1,"").GetValuedDimension();
 
             //-----------------------------------------------------------------------------------------------------------
             // Act
@@ -36,7 +36,7 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
-            ExcelAddressBase address = ExcelPackage1.GetWorksheet("TEST7").GetValuedDimension();
+            ExcelAddressBase? address = ExcelPackage1.GetWorksheet("TEST7")?.GetValuedDimension();
 
             //-----------------------------------------------------------------------------------------------------------
             // Act

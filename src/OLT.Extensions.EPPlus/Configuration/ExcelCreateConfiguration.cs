@@ -8,15 +8,15 @@ namespace OLT.Extensions.EPPlus.Configuration
     {
         public static ExcelCreateConfiguration<T> Instance => new ExcelCreateConfiguration<T>();
 
-        public virtual Action<ExcelRange> ConfigureTitle { get; private set; }
+        public virtual Action<ExcelRange>? ConfigureTitle { get; private set; }
 
-        public virtual Action<ExcelRange, T> ConfigureCell { get; private set; }
+        public virtual Action<ExcelRange, T>? ConfigureCell { get; private set; }
 
-        public virtual Action<ExcelColumn> ConfigureColumn { get; private set; }
+        public virtual Action<ExcelColumn>? ConfigureColumn { get; private set; }
 
-        public virtual Action<ExcelRange> ConfigureHeader { get; private set; }
+        public virtual Action<ExcelRange>? ConfigureHeader { get; private set; }
 
-        public virtual Action<ExcelRange> ConfigureHeaderRow { get; private set; }
+        public virtual Action<ExcelRange>? ConfigureHeaderRow { get; private set; }
 
         public virtual ExcelCreateConfiguration<T> WithCellConfiguration(Action<ExcelRange, T> cellConfiguration)
         {
