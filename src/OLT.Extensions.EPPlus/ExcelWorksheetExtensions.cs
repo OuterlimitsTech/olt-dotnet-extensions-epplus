@@ -11,8 +11,7 @@ using OLT.Extensions.EPPlus.Helpers;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-using static OLT.Extensions.EPPlus.Helpers.Guard;
-using static OfficeOpenXml.ExcelErrorValue;
+
 
 namespace OLT.Extensions.EPPlus
 {
@@ -567,6 +566,27 @@ namespace OLT.Extensions.EPPlus
             }
 
             throw new ExcelValidationException($"'{columnName}' column is duplicated on {rowIndex}. row.");
+        }
+
+        /// <summary>
+        /// Get Column Index for heading text
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="heading">string to find in the first row</param>
+        /// <param name="row">row to search (Default 1)</param>
+        /// <returns>index, null, or throws exception</returns>
+        public static int? GetColIdx(this ExcelWorksheet worksheet, string heading, int? row = 1)
+        {
+            var rowIdx = row.GetValueOrDefault(1);
+            for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+            {
+                if (worksheet.Cells[rowIdx, col].Text.Equals(heading, StringComparison.OrdinalIgnoreCase))
+                {
+                    return col;
+                }
+            }
+
+            return null;
         }
     }
 }

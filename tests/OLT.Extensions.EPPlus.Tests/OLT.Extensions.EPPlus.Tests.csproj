@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ImportTest.xlsx" />
     <None Remove="Resources\testcase1.xlsx" />
     <None Remove="Resources\testsheets1.xlsx" />
     <None Remove="Resources\testsheets2.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\ImportTest.xlsx" />
     <EmbeddedResource Include="Resources\testcase1.xlsx" />
     <EmbeddedResource Include="Resources\testsheets1.xlsx" />
     <EmbeddedResource Include="Resources\testsheets2.xlsx" />
