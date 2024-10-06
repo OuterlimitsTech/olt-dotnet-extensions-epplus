@@ -42,7 +42,7 @@ namespace OLT.Extensions.EPPlus
         /// <returns></returns>
         internal static object? GetPropertyValue(this object obj, string propertyName) => obj.GetType().GetProperty(propertyName)?.GetValue(obj, null);
 
-        internal static string GetWorksheetName(this Type type)
+        internal static string? GetWorksheetName(this Type type)
         {
             Attribute? worksheetAttribute = type.GetCustomAttribute(typeof(ExcelWorksheetAttribute), true);
             return (worksheetAttribute as ExcelWorksheetAttribute)?.WorksheetName ?? type.Name; 

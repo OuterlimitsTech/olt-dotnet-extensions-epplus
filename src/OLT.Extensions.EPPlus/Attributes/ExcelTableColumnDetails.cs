@@ -8,15 +8,15 @@ namespace OLT.Extensions.EPPlus.Attributes
         {
             ColumnPosition = columnPosition;
             PropertyInfo = propertyInfo;
-            ColumnAttribute = columnAttribute ?? new ExcelTableColumnAttribute();
+            ColumnAttribute = columnAttribute;
         }
 
         public PropertyInfo PropertyInfo { get; }
 
-        public ExcelTableColumnAttribute ColumnAttribute { get; }
+        public ExcelTableColumnAttribute? ColumnAttribute { get; }
 
         public int ColumnPosition { get; }
 
-        public override string ToString() => !string.IsNullOrEmpty(ColumnAttribute.ColumnName) ? ColumnAttribute.ColumnName : PropertyInfo.Name;
+        public override string ToString() => !string.IsNullOrEmpty(ColumnAttribute?.ColumnName) ? ColumnAttribute.ColumnName : PropertyInfo.Name;
     }
 }

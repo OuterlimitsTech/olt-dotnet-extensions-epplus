@@ -48,10 +48,7 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
-            var worksheet = package.GetWorksheet(worksheetIndex);
-            //var columns = worksheet.Dimension.Columns;
-            //var val = worksheet.GetExcelRange(true)?.Value;
-            worksheet.Dimension.Columns.Should().Be(3);
+            package.GetWorksheet(worksheetIndex).Dimension.Columns.Should().Be(2);
         }
 
         [Fact]
@@ -73,9 +70,8 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
-            package.GetWorksheet(worksheetIndex).Cells[1, 1, 1, 1].Value.Should().Be("FirstName");
-            package.GetWorksheet(worksheetIndex).Cells[1, 2, 1, 2].Value.Should().Be("LastName");
-            package.GetWorksheet(worksheetIndex).Cells[1, 3, 1, 3].Value.Should().Be("Year of Birth");
+            package.GetWorksheet(worksheetIndex).Cells[1, 1, 1, 1].Value.Should().Be("LastName");
+            package.GetWorksheet(worksheetIndex).Cells[1, 2, 1, 2].Value.Should().Be("Year of Birth");
             package.GetWorksheet(worksheetIndex).Dimension.Rows.Should().Be(_personList.Count + 1);
         }
 
@@ -143,7 +139,7 @@ namespace OLT.Extensions.EPPlus.Tests
                 .ToWorksheet("< 1950")
                 .WithConfiguration(configuration =>
                                    configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Purple))
-                                                .WithHeaderConfiguration(x => x.SetFontName("Arial")                                                        
+                                                .WithHeaderConfiguration(x => x.SetFontName("Arial")
                                                                                //.SetFont(new Font("Arial", 13, FontStyle.Bold))                                                                               
                                                                                .SetFontAsBold()
                                                                                .SetFontSize(13)
@@ -152,34 +148,34 @@ namespace OLT.Extensions.EPPlus.Tests
                                                 .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
                                                                                   .SetFontName("Verdana"))
                                                 .WithCellConfiguration((x, y) =>
-                                                                       {
-                                                                           x.SetFontName("Times New Roman");
-                                                                           x.SetFontSize(13);
-                                                                           //x.SetFont(new Font("Times New Roman", 13));
-                                                                           y.YearBorn = y.YearBorn % 2 == 0 ? y.YearBorn : 1990;
-                                                                       })
+                                                {
+                                                    x.SetFontName("Times New Roman");
+                                                    x.SetFontSize(13);
+                                                    //x.SetFont(new Font("Times New Roman", 13));
+                                                    y.YearBorn = y.YearBorn % 2 == 0 ? y.YearBorn : 1990;
+                                                })
                                                 .WithTitleConfiguration(x => x.SetBackgroundColor(Color.Yellow))
                 )
                 .WithTitle("< 1950")
                 .NextWorksheet(post50, "> 1950")
                 .WithConfiguration(configuration =>
-                                   {
-                                       configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Black))
-                                                    .WithHeaderConfiguration(x =>
-                                                                             {
-                                                                                 x.Style.Font.Bold = true;
-                                                                                 x.Style.Font.Size = 11;
-                                                                                 x.SetFontColor(Color.White);
-                                                                                 x.SetBackgroundColor(Color.Black, ExcelFillStyle.Solid);
-                                                                             })
-                                                    .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
-                                                                                      .SetFontName("Verdana"))
-                                                    .WithCellConfiguration((x, y) =>
-                                                                           {
-                                                                               x.SetFontName("Times New Roman");
-                                                                               y.YearBorn = y.YearBorn % 2 != 0 ? y.YearBorn : 1990;
-                                                                           });
-                                   })
+                {
+                    configuration.WithColumnConfiguration(x => x.SetFontColor(Color.Black))
+                                 .WithHeaderConfiguration(x =>
+                                 {
+                                     x.Style.Font.Bold = true;
+                                     x.Style.Font.Size = 11;
+                                     x.SetFontColor(Color.White);
+                                     x.SetBackgroundColor(Color.Black, ExcelFillStyle.Solid);
+                                 })
+                                 .WithHeaderRowConfiguration(x => x.BorderAround(ExcelBorderStyle.Thin)
+                                                                   .SetFontName("Verdana"))
+                                 .WithCellConfiguration((x, y) =>
+                                 {
+                                     x.SetFontName("Times New Roman");
+                                     y.YearBorn = y.YearBorn % 2 != 0 ? y.YearBorn : 1990;
+                                 });
+                })
                 .WithoutHeader()
                 .WithTitle("> 1950")
                 .ToExcelPackage();
@@ -189,9 +185,9 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             package.Workbook.Worksheets.Count.Should().Be(2);
             package.GetWorksheet(worksheetPre50Index).Dimension.Rows.Should().Be(pre50.Count + 2);
-            package.GetWorksheet(worksheetPre50Index).Dimension.Columns.Should().Be(3);
+            package.GetWorksheet(worksheetPre50Index).Dimension.Columns.Should().Be(2);
             package.GetWorksheet(worksheetPost50Index).Dimension.Rows.Should().Be(post50.Count + 1);
-            package.GetWorksheet(worksheetPost50Index).Dimension.Columns.Should().Be(3);
+            package.GetWorksheet(worksheetPost50Index).Dimension.Columns.Should().Be(2);
             package.GetWorksheet(worksheetPre50Index).Cells[2, 1, 1, 1].Style.Font.Size.Should().Be(13);
             package.GetWorksheet(worksheetPre50Index).Cells[2, 1, 1, 1].Style.Font.Name.Should().Be("Verdana");
             package.GetWorksheet(worksheetPre50Index).Cells[1, 1, 1, 1].Style.Fill.BackgroundColor.Rgb.Should().Be(string.Format("{0:X8}", Color.Yellow.ToArgb() & 0xFFFFFFFF));
@@ -457,13 +453,9 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             excelPackage.Workbook.Worksheets.Any().Should().Be(true);
             excelPackage.Workbook.Worksheets.First().Should().NotBe(null);
-            excelPackage.Workbook.Worksheets.First().Dimension.Rows.Should().Be(3);            
-            //var val1 = excelPackage.Workbook.Worksheets.First().Cells[1, 1, 1, 1].Text;
-            //var val2 = excelPackage.Workbook.Worksheets.First().Cells[1, 2, 1, 2].Text; 
-            //var val3 = excelPackage.Workbook.Worksheets.First().Cells[1, 3, 1, 3].Text;
-            excelPackage.Workbook.Worksheets.First().Cells[1, 1, 1, 1].Text.Should().Be("FirstName");
-            excelPackage.Workbook.Worksheets.First().Cells[1, 2, 1, 2].Text.Should().Be("LastName");
-            excelPackage.Workbook.Worksheets.First().Cells[1, 3, 1, 3].Text.Should().Be("Year of Birth");
+            excelPackage.Workbook.Worksheets.First().Dimension.Rows.Should().Be(3);
+            excelPackage.Workbook.Worksheets.First().Cells[1, 1, 1, 1].Text.Should().Be("LastName");
+            excelPackage.Workbook.Worksheets.First().Cells[1, 2, 1, 2].Text.Should().Be("Year of Birth");
         }
 
         [Fact]
@@ -488,8 +480,8 @@ namespace OLT.Extensions.EPPlus.Tests
             excelPackage.Workbook.Worksheets.Any().Should().Be(true);
             excelPackage.Workbook.Worksheets.First().Should().NotBe(null);
             excelPackage.Workbook.Worksheets.First().Dimension.Rows.Should().Be(2);
-            excelPackage.Workbook.Worksheets.First().Cells[1, 2, 1, 2].Text.Should().Be("Field");
-            excelPackage.Workbook.Worksheets.First().Cells[1, 3, 1, 3].Text.Should().Be("1946");
+            excelPackage.Workbook.Worksheets.First().Cells[1, 1, 1, 1].Text.Should().Be("Field");
+            excelPackage.Workbook.Worksheets.First().Cells[1, 2, 1, 2].Text.Should().Be("1946");
         }
 
         [Fact]
@@ -677,9 +669,9 @@ namespace OLT.Extensions.EPPlus.Tests
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             var worksheet = package.GetWorksheet(worksheetName);
-            worksheet?.Cells[1, 1].Value.Should().Be("title 1");
-            worksheet?.Cells[2, 1].Value.Should().Be("title 2");
-            worksheet?.Cells[3, 1].Value.Should().Be("title 3");
+            worksheet.Cells[1, 1].Value.Should().Be("title 1");
+            worksheet.Cells[2, 1].Value.Should().Be("title 2");
+            worksheet.Cells[3, 1].Value.Should().Be("title 3");
         }
     }
 }

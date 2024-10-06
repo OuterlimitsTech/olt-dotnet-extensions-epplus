@@ -178,7 +178,12 @@ namespace OLT.Extensions.EPPlus
             foreach (var propertyInfoAndColumnAttribute in propertyInfoAndColumnAttributes)
             {
                 PropertyInfo propertyInfo = propertyInfoAndColumnAttribute.PropertyInfo;
-                ExcelTableColumnAttribute columnAttribute = propertyInfoAndColumnAttribute.ColumnAttribute;
+                ExcelTableColumnAttribute? columnAttribute = propertyInfoAndColumnAttribute.ColumnAttribute;
+
+                if (columnAttribute == null)
+                {
+                    continue;
+                }
 
                 if (columnAttribute.ColumnIndex<=0 && string.IsNullOrEmpty(columnAttribute.ColumnName))
                 {

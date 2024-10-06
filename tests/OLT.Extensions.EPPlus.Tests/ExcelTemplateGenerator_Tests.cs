@@ -19,6 +19,8 @@ namespace OLT.Extensions.EPPlus.Tests
         [Fact]
         public void Should_generate_an_Excel_package_from_given_ExcelExportable_class_name()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
@@ -46,6 +48,8 @@ namespace OLT.Extensions.EPPlus.Tests
         [Fact]
         public void Should_generate_an_worksheet_from_given_ExcelExportable_class_name()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
@@ -58,23 +62,23 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            ExcelWorksheet worksheet1 = excelPackage.GenerateWorksheet(executingAssembly, wrongCarsType.Name);
-            ExcelWorksheet worksheet2 = excelPackage.GenerateWorksheet(executingAssembly, defaultMapType.Key,
+            ExcelWorksheet? worksheet1 = excelPackage.GenerateWorksheet(executingAssembly, wrongCarsType.Name);
+            ExcelWorksheet? worksheet2 = excelPackage.GenerateWorksheet(executingAssembly, defaultMapType.Key,
                                                                        act => act.SetHorizontalAlignment(ExcelHorizontalAlignment.Right)
                                                                                  .SetFontAsBold());
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
-            worksheet1.Should().NotBe(null);
-            worksheet1.Name.Should().Be("Wrong Cars");
-            worksheet1.GetColumns(1).Count().Should().BeGreaterThan(0);
+            worksheet1?.Should().NotBe(null);
+            worksheet1?.Name.Should().Be("Wrong Cars");
+            worksheet1?.GetColumns(1).Count().Should().BeGreaterThan(0);
 
-            worksheet2.Should().NotBe(null);
-            worksheet2.Name.Should().Be("DefaultMap");
-            worksheet2.GetColumns(1).Count().Should().BeGreaterThan(0);
-            worksheet2.Cells[1, 1].Style.HorizontalAlignment.Should().Be(ExcelHorizontalAlignment.Right);
-            worksheet2.Cells[1, 2].Style.Font.Bold.Should().BeTrue();
+            worksheet2?.Should().NotBe(null);
+            worksheet2?.Name.Should().Be("DefaultMap");
+            worksheet2?.GetColumns(1).Count().Should().BeGreaterThan(0);
+            worksheet2?.Cells[1, 1].Style.HorizontalAlignment.Should().Be(ExcelHorizontalAlignment.Right);
+            worksheet2?.Cells[1, 2].Style.Font.Bold.Should().BeTrue();
         }
     }
 }

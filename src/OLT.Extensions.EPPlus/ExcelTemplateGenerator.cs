@@ -42,7 +42,9 @@ namespace OLT.Extensions.EPPlus
             
             List<ExcelTableColumnDetails> headerColumns = type?.GetExcelTableColumnAttributesWithPropertyInfo() ?? new List<ExcelTableColumnDetails>();
 
-            ExcelWorksheet worksheet = excelPackage.AddWorksheet(type?.GetWorksheetName() ?? typeName);
+            var worksheetName = type?.GetWorksheetName();
+            worksheetName = string.IsNullOrEmpty(worksheetName) ? typeName : worksheetName;
+            ExcelWorksheet worksheet = excelPackage.AddWorksheet(worksheetName);
 
             for (var i = 0; i < headerColumns.Count; i++)
             {
