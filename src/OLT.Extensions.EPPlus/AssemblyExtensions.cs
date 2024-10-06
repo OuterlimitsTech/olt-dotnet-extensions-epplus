@@ -22,7 +22,7 @@ namespace OLT.Extensions.EPPlus
         public static List<KeyValuePair<string, string>> GetExcelWorksheetNamesOfMarkedTypes(this Assembly thisAssembly)
             => GetTypesMarkedAsExcelWorksheet(thisAssembly).Select(x => new KeyValuePair<string, string>(x.Name, x.GetWorksheetName())).ToList();
 
-        public static Type GetExcelWorksheetMarkedTypeByName(this Assembly thisAssembly, string typeName)
+        public static Type? GetExcelWorksheetMarkedTypeByName(this Assembly thisAssembly, string typeName)
             => GetTypesMarkedAsExcelWorksheet(thisAssembly).FirstOrDefault(x => x.Name.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
     }
 }

@@ -178,7 +178,7 @@ namespace OLT.Extensions.EPPlus
         public static List<T> ToList<T>(this ExcelWorksheet worksheet, Action<ExcelReadConfiguration<T>>? configurationAction = null) where T : new() 
             => worksheet.AsEnumerable(configurationAction).ToList();
 
-        public static ExcelWorksheet ChangeCellValue(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, object value, Action<ExcelRange>? configureCell = null)
+        public static ExcelWorksheet ChangeCellValue(this ExcelWorksheet worksheet, int rowIndex, int columnIndex, object? value, Action<ExcelRange>? configureCell = null)
         {
             configureCell?.Invoke(worksheet.Cells[rowIndex, columnIndex]);
             worksheet.Cells[rowIndex, columnIndex].Value = value;
@@ -235,7 +235,7 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureCells"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, Action<ExcelRange>? configureCells = null, params object[] values) => worksheet.AddLine(rowIndex, 1, configureCells, values);
+        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, Action<ExcelRange>? configureCells = null, params object?[] values) => worksheet.AddLine(rowIndex, 1, configureCells, values);
 
         /// <summary>
         ///     Appends a line to the worksheet
@@ -246,9 +246,9 @@ namespace OLT.Extensions.EPPlus
         /// <param name="configureCells"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, int startColumnIndex, Action<ExcelRange>? configureCells = null, params object[] values)
+        public static ExcelWorksheet AddLine(this ExcelWorksheet worksheet, int rowIndex, int startColumnIndex, Action<ExcelRange>? configureCells = null, params object?[] values)
         {
-            for (var i = 0; i < values.Length; i++)
+            for (var i = 0; i < values?.Length; i++)
             {
                 worksheet.ChangeCellValue(rowIndex, i + startColumnIndex, values[i], configureCells);
             }
@@ -274,7 +274,8 @@ namespace OLT.Extensions.EPPlus
             {
                 for (int j = startColumnIndex; j < startColumnIndex + typeof(T).GetProperties().Length; j++)
                 {
-                    worksheet.AddLine(i + startRowIndex, j, configureCells, items.ElementAt(i)!.GetPropertyValue(typeof(T).GetProperties()[j - startColumnIndex].Name));
+                    var values = items.ElementAt(i)!.GetPropertyValue(typeof(T).GetProperties()[j - startColumnIndex].Name);
+                    worksheet.AddLine(i + startRowIndex, j, configureCells, values);
                 }
             }
 

@@ -11,6 +11,6 @@ namespace OLT.Extensions.EPPlus.Attributes
 
         public ExcelWorksheetAttribute(string worksheetName) => WorksheetName = worksheetName;
 
-        public string WorksheetName { get; }
+        public string WorksheetName { get; } = string.Empty;
     }
 }

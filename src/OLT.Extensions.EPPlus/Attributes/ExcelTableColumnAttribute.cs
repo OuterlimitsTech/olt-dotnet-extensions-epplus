@@ -13,8 +13,7 @@ namespace OLT.Extensions.EPPlus.Attributes
     public class ExcelTableColumnAttribute : Attribute
     {
         private int _columnIndex;
-
-        private string _columnName;
+        private string? _columnName;
         
 
         public ExcelTableColumnAttribute(bool isOptional = false)
@@ -43,7 +42,7 @@ namespace OLT.Extensions.EPPlus.Attributes
         /// <summary>
         ///     Set this property to map by name
         /// </summary>
-        public string ColumnName
+        public string? ColumnName
         {
             get => _columnName;
             set

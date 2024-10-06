@@ -25,13 +25,13 @@ namespace OLT.Extensions.EPPlus.Tests
             //-----------------------------------------------------------------------------------------------------------
             // Act
             //-----------------------------------------------------------------------------------------------------------
-            Type type = executingAssembly.GetExcelWorksheetMarkedTypeByName(wrongCars.Key);
+            Type? type = executingAssembly.GetExcelWorksheetMarkedTypeByName(wrongCars.Key);
 
             //-----------------------------------------------------------------------------------------------------------
             // Assert
             //-----------------------------------------------------------------------------------------------------------
             type.Should().NotBe(null);
-            type.Name.Should().Be(wrongCars.Key);
+            type?.Name.Should().Be(wrongCars.Key);
         }
 
         [Fact]

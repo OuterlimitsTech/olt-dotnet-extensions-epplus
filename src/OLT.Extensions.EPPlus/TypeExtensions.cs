@@ -11,8 +11,7 @@ namespace OLT.Extensions.EPPlus
 {
     internal static class TypeExtensions
     {
-        internal static object ChangeType(this object value, Type type)
-            => value != null ? Convert.ChangeType(value, type) : null;
+        internal static object? ChangeType(this object value, Type type) => value != null ? Convert.ChangeType(value, type) : null;
 
         /// <summary>
         ///     Returns PropertyInfo and ExcelTableColumnAttribute pairs of given type
@@ -41,11 +40,11 @@ namespace OLT.Extensions.EPPlus
         /// <param name="obj"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        internal static object GetPropertyValue(this object obj, string propertyName) => obj.GetType().GetProperty(propertyName)?.GetValue(obj, null);
+        internal static object? GetPropertyValue(this object obj, string propertyName) => obj.GetType().GetProperty(propertyName)?.GetValue(obj, null);
 
-        internal static string GetWorksheetName(this Type type)
+        internal static string? GetWorksheetName(this Type type)
         {
-            Attribute worksheetAttribute = type.GetCustomAttribute(typeof(ExcelWorksheetAttribute), true);
+            Attribute? worksheetAttribute = type.GetCustomAttribute(typeof(ExcelWorksheetAttribute), true);
             return (worksheetAttribute as ExcelWorksheetAttribute)?.WorksheetName ?? type.Name; 
         }
 
