@@ -462,7 +462,8 @@ namespace OLT.Extensions.EPPlus
 
             for (var i = 0; i < propertyInfoAndColumnAttributes.Count; i++)
             {
-                if (propertyInfoAndColumnAttributes[i].ColumnAttribute.IsOptional)
+                var attr = propertyInfoAndColumnAttributes[i].ColumnAttribute;
+                if (attr == null || attr.IsOptional)
                 {
                     continue;
                 }
