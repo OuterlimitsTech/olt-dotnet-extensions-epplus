@@ -7,6 +7,7 @@ namespace OLT.EPPlus
     /// <summary>
     /// new ExcelPackageColumn { Heading = "Secondary Parent Email", Width = 23.43m }
     /// </summary>
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public class OltExcelColumn : OltExcelCellWriter<string>, IOltExcelColumn
     {
         public string Heading

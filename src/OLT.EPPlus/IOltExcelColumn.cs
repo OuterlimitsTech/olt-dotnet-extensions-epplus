@@ -1,5 +1,8 @@
-﻿namespace OLT.EPPlus
+﻿using System;
+
+namespace OLT.EPPlus
 {
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public interface IOltExcelColumn : IOltExcelCellWriter
     {
         string Heading { get; set; }

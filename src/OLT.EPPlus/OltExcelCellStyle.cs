@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
@@ -7,6 +8,7 @@ namespace OLT.EPPlus
     /// <summary>
     /// Used to set style on cell or range of cells
     /// </summary>
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public class OltExcelCellStyle : IOltExcelCellStyle
     {
         public int? Indent { get; set; }

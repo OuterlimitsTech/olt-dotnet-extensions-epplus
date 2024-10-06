@@ -1,7 +1,9 @@
 ﻿using OfficeOpenXml;
+using System;
 
 namespace OLT.EPPlus
 {
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public interface IOltExcelRowWriter
     {
         /// <summary>

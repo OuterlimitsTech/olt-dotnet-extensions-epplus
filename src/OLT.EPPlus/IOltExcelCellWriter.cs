@@ -3,6 +3,7 @@ using OfficeOpenXml;
 
 namespace OLT.EPPlus
 {
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public interface IOltExcelCellWriter
     {
         IOltExcelCellStyle Style { get; set; }

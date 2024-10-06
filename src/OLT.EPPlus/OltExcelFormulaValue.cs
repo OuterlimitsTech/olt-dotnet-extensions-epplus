@@ -7,6 +7,7 @@ namespace OLT.EPPlus
     /// <summary>
     /// new ExcelFormulaValue("'Performance Worksheet'!AF2")
     /// </summary>
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public class OltExcelFormulaValue : OltExcelCellWriter<string>
     {
         public OltExcelFormulaValue(string formula) : base(FormatValue(formula))

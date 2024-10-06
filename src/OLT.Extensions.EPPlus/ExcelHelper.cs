@@ -1,62 +1,16 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using OfficeOpenXml;
+using System.Text;
 
-namespace OLT.EPPlus
+namespace OLT.Extensions.EPPlus
 {
-    public static class OltExcelPackageHelpers
+
+
+    public static class ExcelHelper
     {
-
-        /// <summary>
-        /// Get Column Index for heading text
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="heading">string to find in the first row</param>
-        /// <param name="row">row to search (Default 1)</param>
-        /// <returns>index, null, or throws exception</returns>
-        [Obsolete("Moved to OLT.Extensions.EPPlus")]
-        public static int? GetColIdx(this ExcelWorksheet worksheet, string heading, int? row = 1)
-        {
-            var rowIdx = row.GetValueOrDefault(1);
-            for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
-            {
-                if (worksheet.Cells[rowIdx, col].Text.Equals(heading, StringComparison.OrdinalIgnoreCase))
-                {
-                    return col;
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Writes columns starting at column index zero (0) at row index
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="columns"></param>
-        /// <param name="row"></param>
-        public static void Write(this ExcelWorksheet worksheet, List<IOltExcelColumn> columns, int row)
-        {
-            Write(worksheet, columns, row, null);
-        }
-
-        /// <summary>
-        /// Writes columns starting at column index zero (0) at row index
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="columns"></param>
-        /// <param name="row"></param>
-        /// <param name="rangeAction">void rangeAction(ExcelRange range)</param>
-        public static void Write(this ExcelWorksheet worksheet, List<IOltExcelColumn> columns, int row, Action<ExcelRange> rangeAction)
-        {
-            var idx = 1;
-            columns.ForEach(col =>
-            {
-                idx = col.Write(worksheet, idx, row);
-            });
-        }
-
         /// <summary>
         /// Calculates the Excel Column Index for a giving Letter
         /// https://www.vishalon.net/blog/excel-column-letter-to-number-quick-reference
@@ -65,7 +19,6 @@ namespace OLT.EPPlus
         /// Must only be 1-2 alpha characters
         /// </param>
         /// <returns>index or throws <seealso cref="ArgumentOutOfRangeException"/> or <seealso cref="ArgumentNullException"/></returns>
-        [Obsolete("Moved to OLT.Extensions.EPPlus.ExcelHelper")]
         public static int ColumnLetterToColumnIndex(string columnLetter)
         {
             if (columnLetter == null)
@@ -85,7 +38,7 @@ namespace OLT.EPPlus
             for (int i = 0; i < columnLetter.Length; i++)
             {
                 sum *= 26;
-                sum += (columnLetter[i] - 'A' + 1);
+                sum += columnLetter[i] - 'A' + 1;
             }
             return sum;
         }
@@ -98,7 +51,6 @@ namespace OLT.EPPlus
         /// Must be between 1 and 702
         /// </param>
         /// <returns>string or throws <seealso cref="ArgumentOutOfRangeException"/></returns>
-        [Obsolete("Moved to OLT.Extensions.EPPlus.ExcelHelper")]
         public static string ColumnIndexToColumnLetter(int colIndex)
         {
             var isValid = colIndex > 0 && colIndex <= 702;
@@ -118,5 +70,8 @@ namespace OLT.EPPlus
             }
             return colLetter;
         }
+
+
+
     }
 }

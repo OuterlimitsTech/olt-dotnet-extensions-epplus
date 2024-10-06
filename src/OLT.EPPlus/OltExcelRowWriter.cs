@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OfficeOpenXml;
 
 namespace OLT.EPPlus
@@ -6,6 +7,7 @@ namespace OLT.EPPlus
     /// <summary>
     /// Writes all Cells to the Row
     /// </summary>
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public class OltExcelRowWriter : IOltExcelRowWriter
     {
 

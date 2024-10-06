@@ -1,10 +1,12 @@
 ﻿using OfficeOpenXml;
+using System;
 
 namespace OLT.EPPlus
 {
     /// <summary>
     /// Adds empty Row to worksheet
     /// </summary>
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public class OltExcelRowEmpty : IOltExcelRowWriter
     {
         /// <summary>

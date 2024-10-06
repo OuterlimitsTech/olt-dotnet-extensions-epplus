@@ -3,6 +3,7 @@ using OfficeOpenXml;
 
 namespace OLT.EPPlus
 {
+    [Obsolete("Package No Longer Maintained -> Use OLT.Extensions.EPPlus")]
     public abstract class OltExcelCellWriter<T> : IOltExcelCellWriter
     {
         protected OltExcelCellWriter()

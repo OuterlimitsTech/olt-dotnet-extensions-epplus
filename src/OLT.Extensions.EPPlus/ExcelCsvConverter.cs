@@ -1,23 +1,20 @@
-﻿
-using System;
+﻿using OfficeOpenXml;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using OfficeOpenXml;
 
-namespace OLT.EPPlus
+namespace OLT.Extensions.EPPlus
 {
-    public static class OltExcelCsvConverter
+    public static class ExcelCsvConverter
     {
 
         /// <summary>
         /// Converts worksheet to CSV
         /// </summary>
         /// <param name="worksheet"></param>
-        /// <returns><see cref="OltExcelCsvWorksheet"/></returns>
-        [Obsolete("Moved to OLT.Extensions.EPPlus -> ToCsv")]
-        public static OltExcelCsvWorksheet ConvertToCsv(this ExcelWorksheet worksheet)
+        /// <returns><see cref="CsvWorksheet"/></returns>
+        public static CsvWorksheet ToCsv(this ExcelWorksheet worksheet)
         {
             var maxColumnNumber = worksheet.Dimension.End.Column;
             var currentRow = new List<string>(maxColumnNumber);
@@ -38,43 +35,30 @@ namespace OLT.EPPlus
                 }
             }
 
-            return new OltExcelCsvWorksheet
-            {
-                Name = worksheet.Name,
-                Csv = memory.ToArray()
-            };
+            return new CsvWorksheet(worksheet.Name, memory.ToArray());
+
         }
 
         /// <summary>
         /// Converts all Worksheets in Workbook to a CSV byte array
         /// </summary>
         /// <param name="package"></param>
-        /// <returns>Returns List of <see cref="OltExcelCsvWorksheet"/></returns>
-        [Obsolete("Moved to OLT.Extensions.EPPlus -> ToCsv")]
-        public static List<OltExcelCsvWorksheet> ConvertToCsv(this ExcelPackage package)
+        /// <returns>Returns List of <see cref="CsvWorksheet"/></returns>
+        public static List<CsvWorksheet> ToCsv(this ExcelPackage package)
         {
-            var list = new List<OltExcelCsvWorksheet>();
+            var list = new List<CsvWorksheet>();
 
             package.Workbook.Worksheets
                 .ToList()
                 .ForEach(worksheet =>
                 {
-                    list.Add(worksheet.ConvertToCsv());
+                    list.Add(worksheet.ToCsv());
                 });
 
             return list;
         }
 
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cellValues">List of cell values</param>
-        /// <param name="sw">Open Writer to file</param>
-        /// <param name="rowNumber">Current row num</param>
-        /// <param name="totalRowCount"></param>
-        /// <remarks>Avoiding writing final empty line so bulk import processes can work.</remarks>
         private static void WriteRecordToFile(List<string> cellValues, StreamWriter sw, int rowNumber, int totalRowCount)
         {
             var commaDelimitedRecord = string.Join(",", cellValues);
@@ -102,15 +86,14 @@ namespace OLT.EPPlus
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
-        public static string GetCellText(this ExcelRangeBase cell)
+        public static string? GetCellText(this ExcelRangeBase cell)
         {
             return cell?.Value?.ToString();
         }
 
-        private static void AddCellValue(string value, List<string> record)
+        private static void AddCellValue(string? value, List<string> record)
         {
-            record.Add(string.Format("{0}{1}{0}", '"', value));
+            record.Add(string.Format("{0}{1}{0}", '"', value ?? string.Empty));
         }
-
     }
 }
