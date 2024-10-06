@@ -86,7 +86,7 @@ namespace OLT.Extensions.EPPlus
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
-        public static string? GetCellText(this ExcelRangeBase cell)
+        private static string? GetCellText(this ExcelRangeBase cell)
         {
             return cell?.Value?.ToString();
         }

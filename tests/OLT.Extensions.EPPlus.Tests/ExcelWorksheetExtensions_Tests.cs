@@ -12,7 +12,6 @@ using OfficeOpenXml.Table;
 
 namespace OLT.Extensions.EPPlus.Tests
 {
-
     public class ExcelWorksheetExtensionsTests : TestBase
     {
         [Fact]
