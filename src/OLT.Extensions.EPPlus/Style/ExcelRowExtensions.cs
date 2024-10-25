@@ -9,19 +9,6 @@ namespace OLT.Extensions.EPPlus.Style
     public static class ExcelRowExtensions
     {
         /// <summary>
-        ///     Sets the font of ExcelRow from a Font object
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelRow SetFont(this ExcelRow row, Font font)
-        {
-            //row.Style.SetFont(font);
-            return row;
-        }
-
-        /// <summary>
         ///     Sets the font color of ExcelRow from a Color object
         /// </summary>
         /// <param name="row"></param>

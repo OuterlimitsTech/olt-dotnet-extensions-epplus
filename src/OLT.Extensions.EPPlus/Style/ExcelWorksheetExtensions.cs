@@ -8,33 +8,7 @@ namespace OLT.Extensions.EPPlus.Style
 {
     public static class ExcelWorksheetExtensions
     {
-        /// <summary>
-        ///     Sets the font of ExcelWorksheet cells from a Font object
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelWorksheet SetFont(this ExcelWorksheet worksheet, Font font)
-        {
-            //worksheet.Cells.SetFont(font);
-            return worksheet;
-        }
-
-        /// <summary>
-        ///     Sets the font of given cell range from a Font object
-        /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="cellRange"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelWorksheet SetFont(this ExcelWorksheet worksheet, ExcelRange cellRange, Font font)
-        {
-            //worksheet.Cells[cellRange.Address].SetFont(font);
-            return worksheet;
-        }
-
+       
         /// <summary>
         ///     Sets the font color of ExcelWorksheet cells from a Color object
         /// </summary>

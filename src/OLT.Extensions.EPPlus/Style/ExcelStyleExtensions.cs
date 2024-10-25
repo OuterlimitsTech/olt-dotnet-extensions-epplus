@@ -54,34 +54,7 @@ namespace OLT.Extensions.EPPlus.Style
             return thisStyle;
         }
 
-        /// <summary>
-        ///     Sets font of Excel style
-        /// </summary>
-        /// <param name="thisStyle">The Excel style</param>
-        /// <param name="font">The font</param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font)
-        {
-            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);            
-            return thisStyle;
-        }
-
-        /// <summary>
-        ///     Sets font and color of Excel style
-        /// </summary>
-        /// <param name="thisStyle">The Excel style</param>
-        /// <param name="font">The font</param>
-        /// <param name="color">The color</param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelStyle SetFont(this ExcelStyle thisStyle, Font font, Color color)
-        {
-            //thisStyle.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
-            thisStyle.SetFontColor(color);
-            return thisStyle;
-        }
-
+       
         /// <summary>
         ///     Sets font color of Excel style
         /// </summary>
