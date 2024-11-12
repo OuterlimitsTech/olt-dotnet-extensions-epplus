@@ -1,8 +1,6 @@
-﻿using System;
-using System.Drawing;
-
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System.Drawing;
 
 namespace OLT.Extensions.EPPlus.Style
 {
