@@ -9,6 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OLT.Extensions.EPPlus", "OL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.EPPlus.Tests", "tests\OLT.Extensions.EPPlus.Tests\OLT.Extensions.EPPlus.Tests.csproj", "{7F71C353-AF16-4BCE-B782-C6CB8739A45D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{A93BDA00-E6F4-4503-96A3-825B2FA50FE4}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
