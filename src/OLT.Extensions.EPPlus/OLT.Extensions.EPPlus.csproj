@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-		<TargetFrameworks>net8.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>net9.0;net8.0</TargetFrameworks>
     <ProjectGuid>{503C4D70-3934-486C-B983-6C1E3AE5C1A5}</ProjectGuid>
 		<Description>Extensions for EPPlus - Cloned from the original packages EPPlus.Core.Extensions</Description>
 		<Nullable>enable</Nullable>
