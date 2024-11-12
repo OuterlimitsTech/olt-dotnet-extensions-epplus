@@ -9,19 +9,6 @@ namespace OLT.Extensions.EPPlus.Style
     public static class ExcelColumnExtensions
     {
         /// <summary>
-        ///     Sets the font of ExcelColumn from a Font object
-        /// </summary>
-        /// <param name="column"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelColumn SetFont(this ExcelColumn column, Font font)
-        {
-            //column.Style.SetFont(font);
-            return column;
-        }
-
-        /// <summary>
         ///     Sets the font color of ExcelColumn
         /// </summary>
         /// <param name="column"></param>

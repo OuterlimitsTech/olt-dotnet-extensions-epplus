@@ -58,19 +58,6 @@ namespace OLT.Extensions.EPPlus.Style
             return range;
         }
 
-        /// <summary>
-        ///     Sets the font of given range from a Font object
-        /// </summary>
-        /// <param name="range"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        [Obsolete("Deprecated due to Windows Only Support, Use independent methods", true)]
-        public static ExcelRangeBase SetFont(this ExcelRangeBase range, Font font)
-        {
-            //range.Style.Font.SetFromFont(font.Name, font.Size, font.Bold, font.Italic, font.Underline, font.Strikeout);
-            return range;
-        }
-
 
         /// <summary>
         ///     Sets the font color of given range from a Color object
