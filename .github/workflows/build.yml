@@ -65,6 +65,6 @@ jobs:
           EPPLUS_LICENSE_KEY: ${{ secrets.EPPLUS_LICENSE_KEY }}
 
       - name: Sonarqube end
-        run: dotnet tool run dotnet-sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
+        run: dotnet tool run dotnet-sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }} /d:sonar.scanner.scanAll=false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
