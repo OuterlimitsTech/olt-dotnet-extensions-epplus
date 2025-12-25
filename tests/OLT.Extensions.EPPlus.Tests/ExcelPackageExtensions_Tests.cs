@@ -1,13 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-
-using FluentAssertions;
-
+﻿using AwesomeAssertions;
 using OfficeOpenXml;
-
-using Xunit;
 
 namespace OLT.Extensions.EPPlus.Tests
 {

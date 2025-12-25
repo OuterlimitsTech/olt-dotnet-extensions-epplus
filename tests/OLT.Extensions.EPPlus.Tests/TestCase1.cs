@@ -1,19 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-
-using OLT.Extensions.EPPlus.Attributes;
-
-using FluentAssertions;
-
+﻿using AwesomeAssertions;
 using OfficeOpenXml;
-
-using Xunit;
+using OLT.Extensions.EPPlus.Attributes;
+using System.Globalization;
+using System.Reflection;
 
 namespace OLT.Extensions.EPPlus.Tests
 {
-    public class TestCase1
+    public class TestCase1 : TestBase
     {
         [Fact]
         public void TestCase()

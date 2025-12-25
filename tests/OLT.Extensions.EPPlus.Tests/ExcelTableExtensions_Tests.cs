@@ -1,6 +1,6 @@
 ﻿using OLT.Extensions.EPPlus.Attributes;
 using OLT.Extensions.EPPlus.Exceptions;
-using FluentAssertions;
+using AwesomeAssertions;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
