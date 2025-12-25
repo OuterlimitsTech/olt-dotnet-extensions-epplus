@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-using OLT.Extensions.EPPlus.Style;
-
-using FluentAssertions;
-
+﻿using AwesomeAssertions;
+using Microsoft.Extensions.Configuration;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-
-using Xunit;
+using OLT.Extensions.EPPlus.Style;
+using System.Reflection;
 
 namespace OLT.Extensions.EPPlus.Tests
-{
-    public class ExcelTemplateGeneratorTests
+{    
+
+    public class ExcelTemplateGeneratorTests : TestBase
     {
         [Fact]
         public void Should_generate_an_Excel_package_from_given_ExcelExportable_class_name()
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
+            
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------
@@ -48,8 +41,6 @@ namespace OLT.Extensions.EPPlus.Tests
         [Fact]
         public void Should_generate_an_worksheet_from_given_ExcelExportable_class_name()
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
             //-----------------------------------------------------------------------------------------------------------
             // Arrange
             //-----------------------------------------------------------------------------------------------------------

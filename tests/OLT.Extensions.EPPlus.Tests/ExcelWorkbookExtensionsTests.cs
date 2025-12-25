@@ -1,7 +1,5 @@
 ﻿using OLT.Extensions.EPPlus.Style;
-
-using FluentAssertions;
-
+using AwesomeAssertions;
 using OfficeOpenXml;
 
 namespace OLT.Extensions.EPPlus.Tests

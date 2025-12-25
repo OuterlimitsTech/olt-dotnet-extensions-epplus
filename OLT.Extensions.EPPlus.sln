@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32804.467
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.EPPlus", "src\OLT.Extensions.EPPlus\OLT.Extensions.EPPlus.csproj", "{37033589-D383-4D6B-9F9E-3CF8B46935DD}"
 EndProject
@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{A93BDA00-E6F4-4503-96A3-825B2FA50FE4}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\dependabot.yml = .github\dependabot.yml
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection

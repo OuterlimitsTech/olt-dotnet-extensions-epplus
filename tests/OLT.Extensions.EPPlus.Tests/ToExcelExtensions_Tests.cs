@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Security;
-
-using OLT.Extensions.EPPlus.Style;
-
-using FluentAssertions;
-
+﻿using AwesomeAssertions;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-
-using Xunit;
+using OLT.Extensions.EPPlus.Style;
+using System.Drawing;
+using System.Security;
 
 namespace OLT.Extensions.EPPlus.Tests
 {

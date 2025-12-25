@@ -37,6 +37,7 @@ jobs:
           dotnet-version: |            
             8.0.x
             9.0.x
+            10.0.x
 
 
       - name: Get branch name
@@ -61,8 +62,9 @@ jobs:
         env:
           ASPNETCORE_ENVIRONMENT: Test
           DOTNET_ENVIRONMENT: Test
+          EPPLUS_LICENSE_KEY: ${{ secrets.EPPLUS_LICENSE_KEY }}
 
-      - name: Sonarqube end
-        run: dotnet tool run dotnet-sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Sonarqube end
+      #   run: dotnet tool run dotnet-sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
