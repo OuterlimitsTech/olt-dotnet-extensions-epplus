@@ -62,6 +62,7 @@ jobs:
         env:
           ASPNETCORE_ENVIRONMENT: Test
           DOTNET_ENVIRONMENT: Test
+          EPPLUS_LICENSE_KEY: ${{ secrets.EPPLUS_LICENSE_KEY }}
 
       - name: Sonarqube end
         run: dotnet tool run dotnet-sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
