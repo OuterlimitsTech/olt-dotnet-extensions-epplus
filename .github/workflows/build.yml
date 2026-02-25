@@ -14,7 +14,7 @@ on:
 
 env:
   SOURCE_DIRECTORY: ${{ github.workspace }}
-  SOLUTION_FILE: "OLT.Extensions.EPPlus.sln"
+  SOLUTION_FILE: "OLT.Extensions.EPPlus.slnx"
 
 jobs:
   build:
