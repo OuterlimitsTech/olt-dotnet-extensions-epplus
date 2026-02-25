@@ -5,6 +5,9 @@
     <File Path=".github/workflows/build.yml" />
     <File Path=".github/workflows/release.yml" />
   </Folder>
+  <Folder Name="/OLT.EPPlus/">
+    <Project Path="src/OLT.EPPlus/OLT.EPPlus.csproj" Id="0acb3180-e491-4c1a-a2af-0eff584ec2bc" />
+  </Folder>
   <Folder Name="/OLT.Extensions.EPPlus/">
     <Project Path="src/OLT.Extensions.EPPlus/OLT.Extensions.EPPlus.csproj" />
     <Project Path="tests/OLT.Extensions.EPPlus.Tests/OLT.Extensions.EPPlus.Tests.csproj" />
